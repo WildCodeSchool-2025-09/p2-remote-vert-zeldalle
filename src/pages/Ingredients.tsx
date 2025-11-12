@@ -1,5 +1,5 @@
 function Ingredients() {
-    return <></>;
+	return <></>;
 }
 
 export default Ingredients;

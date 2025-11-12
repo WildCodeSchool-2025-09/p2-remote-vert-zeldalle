@@ -1,5 +1,5 @@
 function Inventory() {
-    return <></>;
+	return <></>;
 }
 
 export default Inventory;
