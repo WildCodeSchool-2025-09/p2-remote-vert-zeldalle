@@ -1,12 +1,8 @@
 import "./App.css";
 
-function App() {
-	const name = "toto";
-	const text = "Welcome";
+function App() {		
 	return (
-		<>
-			{text} {name}
-		</>
+		<></>
 	);
 }
 
