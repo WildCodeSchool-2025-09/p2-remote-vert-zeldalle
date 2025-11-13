@@ -1,5 +1,11 @@
+import IngredientList from "../components/ingredients/IngredientList";
+
 function Ingredients() {
-	return <></>;
+	return (
+		<>
+			<IngredientList />
+		</>
+	);
 }
 
 export default Ingredients;
