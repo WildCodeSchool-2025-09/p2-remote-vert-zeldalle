@@ -11,13 +11,16 @@
 		"prepare": "husky || true"
 	},
 	"dependencies": {
+		"@react-three/drei": "^9.56.4",
+		"@react-three/fiber": "^8.15.11",
 		"beercontest": "file:",
 		"dotenv": "^16.4.5",
 		"gg": "file:",
 		"lesperses": "file:",
 		"react": "^18.3.1",
 		"react-dom": "^18.3.1",
-		"react-router": "^7.9.5"
+		"react-router": "^7.9.5",
+		"three": "^0.152.2"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^1.9.2",
