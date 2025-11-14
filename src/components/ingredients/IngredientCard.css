@@ -15,3 +15,12 @@
 	height: 90%;
 	object-fit: contain;
 }
+
+.ingredient-card p {
+	display: flex;
+	
+	border-radius: 50%;
+	width: 30px;
+	height: 30px;
+	background: whitesmoke;
+}

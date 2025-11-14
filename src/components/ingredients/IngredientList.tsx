@@ -21,6 +21,13 @@ function IngredientList() {
 	const [page, setPage] = useState(0);
 	const ingredientsPerPage = 16;
 	const INGREDIENTS_API = import.meta.env.VITE_API_INGREDIENTS;
+	const [counts, setCounts] = useState<{ [id: number]: number }>({});
+	const incrementCount = (id: number) => {setCounts((prev) => ({
+			...prev,
+			[id]: (prev[id] || 0) + 1,
+		}));
+	};
+
 
 	useEffect(() => {
 		fetch(INGREDIENTS_API)
@@ -31,14 +38,18 @@ function IngredientList() {
 	const startIndex = page * ingredientsPerPage;
 	const endIndex = startIndex + ingredientsPerPage;
 	const currentIngredients = ingredients.slice(startIndex, endIndex);
-
 	const totalPages = Math.ceil(ingredients.length / ingredientsPerPage);
 
 	return (
 		<section className="ingredient-list-wrapper">
 			<div className="ingredient-list">
 				{currentIngredients.map((ingredient) => (
-					<IngredientCard key={ingredient.id} ingredient={ingredient} />
+					<IngredientCard 
+						key={ingredient.id} 
+						ingredient={ingredient} 
+						count={counts[ingredient.id] || 0} 
+						onIncrement={() => incrementCount(ingredient.id)}
+						/>
 				))}
 			</div>
 
