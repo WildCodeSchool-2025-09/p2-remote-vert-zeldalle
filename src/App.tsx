@@ -1,11 +1,11 @@
+import { Outlet } from "react-router";
 import "./App.css";
-import IngredientList from "./components/ingredients/IngredientList";
 
 function App() {
 	return (
-		<div className="App">
-			<IngredientList />
-		</div>
+		<main className="App">
+			<Outlet  />
+		</main>
 	);
 }
 
