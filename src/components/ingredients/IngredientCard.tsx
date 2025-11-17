@@ -10,11 +10,18 @@ interface IngredientCardProps {
 	onIncrement: () => void;
 }
 
-function IngredientCard({ ingredient, count, onIncrement }: IngredientCardProps) {
+function IngredientCard({
+	ingredient,
+	count,
+	onIncrement,
+}: IngredientCardProps) {
 	return (
-		<button className="ingredient-card" onClick={onIncrement} onKeyDown={(event) => {
+		<button
+			className="ingredient-card"
+			onClick={onIncrement}
+			onKeyDown={(event) => {
 				if (event.key === "Enter" || event.key === " ") {
-					onIncrement(); 
+					onIncrement();
 				}
 			}}
 			type="button"
@@ -24,6 +31,4 @@ function IngredientCard({ ingredient, count, onIncrement }: IngredientCardProps)
 		</button>
 	);
 }
-
-
 export default IngredientCard;

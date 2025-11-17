@@ -6,25 +6,20 @@ import "./components/ingredients/IngredientCard.css";
 import "./components/ingredients/IngredientList.css";
 import DetailIngredient from "./components/DetailIngredient";
 
-
 export default function App() {
-
-		
-const [selectedIngredient, setSelectedIngredient] =
-    useState<IngredientType | null>(null);
-
+	const [selectedIngredient, setSelectedIngredient] =
+		useState<IngredientType | null>(null);
 
 	return (
 		<div>
 			<h1>Zeldappétit</h1>
-			<IngredientList onSelect={setSelectedIngredient}/>
-						
-			<IngredientMap onSelect={setSelectedIngredient}/>
+			<IngredientList onSelect={setSelectedIngredient} />
+
+			<IngredientMap onSelect={setSelectedIngredient} />
 			{selectedIngredient && <MapDisplay ingredient={selectedIngredient} />}
 			{selectedIngredient && (
- 			 <DetailIngredient ingredient={selectedIngredient} />)}
-
-			
+				<DetailIngredient ingredient={selectedIngredient} />
+			)}
 		</div>
 	);
 }

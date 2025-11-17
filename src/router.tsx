@@ -1,11 +1,9 @@
-
+import { createBrowserRouter } from "react-router-dom";
 import App from "./App";
 import Home from "./pages/Home";
 import Ingredients from "./pages/Ingredients";
 import Inventory from "./pages/Inventory";
 import Recipes from "./pages/Recipes";
-import { createBrowserRouter } from "react-router-dom";
-
 
 const router = createBrowserRouter([
 	{

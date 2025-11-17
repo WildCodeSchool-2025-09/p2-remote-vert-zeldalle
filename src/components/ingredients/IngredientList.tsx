@@ -17,18 +17,20 @@ interface Ingredients {
 	hearts_image: string;
 }
 
-function IngredientList({onSelect}: { onSelect: (ingredient: Ingredients) => void}) {
+function IngredientList({
+	onSelect,
+}: { onSelect: (ingredient: Ingredients) => void }) {
 	const [ingredients, setIngredients] = useState<Ingredients[]>([]);
 	const [page, setPage] = useState(0);
 	const ingredientsPerPage = 16;
 	const INGREDIENTS_API = import.meta.env.VITE_API_INGREDIENTS;
 	const [counts, setCounts] = useState<{ [id: number]: number }>({});
-	const incrementCount = (id: number) => {setCounts((prev) => ({
+	const incrementCount = (id: number) => {
+		setCounts((prev) => ({
 			...prev,
 			[id]: (prev[id] || 0) + 1,
 		}));
 	};
-
 
 	useEffect(() => {
 		fetch(INGREDIENTS_API)
@@ -45,15 +47,19 @@ function IngredientList({onSelect}: { onSelect: (ingredient: Ingredients) => voi
 		<section className="ingredient-list-wrapper">
 			<div className="ingredient-list">
 				{currentIngredients.map((ingredient) => (
-				<div key={ingredient.id} onClick={() => onSelect(ingredient)} style={{ cursor: 'pointer' }}>
-					<IngredientCard 
-						key={ingredient.id} 
-						ingredient={ingredient} 
-						count={counts[ingredient.id] || 0} 
-						onIncrement={() => incrementCount(ingredient.id)}
+					// biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
+					<div
+						key={ingredient.id}
+						onClick={() => onSelect(ingredient)}
+						style={{ cursor: "pointer" }}
+					>
+						<IngredientCard
+							key={ingredient.id}
+							ingredient={ingredient}
+							count={counts[ingredient.id] || 0}
+							onIncrement={() => incrementCount(ingredient.id)}
 						/>
-				</div>
-
+					</div>
 				))}
 			</div>
 
