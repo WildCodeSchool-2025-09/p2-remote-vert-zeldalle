@@ -1,7 +1,5 @@
 function Recipes() {
-	return (
-        <></>
-    )
+	return <></>;
 }
 
 export default Recipes;
