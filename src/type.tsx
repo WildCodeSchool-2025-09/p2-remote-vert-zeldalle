@@ -23,7 +23,7 @@ export interface Ingredient {
 	image: string;
 	effects_image: string;
 	hearts_image: string;
-	}
+}
 
 export interface ItemCardProps {
 	item: Ingredient | Recipe;
@@ -31,7 +31,7 @@ export interface ItemCardProps {
 	count: number;
 	onIncrement: () => void;
 }
-    
+
 export interface ItemListProps {
 	items: (Ingredient | Recipe)[];
 	type: "ingredient" | "recipe";

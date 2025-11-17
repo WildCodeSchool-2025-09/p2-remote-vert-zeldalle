@@ -31,10 +31,10 @@
 	z-index: 10;
 }
 
-.page-buttons button:first-child {
+.page-buttons .fleche-gauche {
 	left: 4%;
 }
 
-.page-buttons button:last-child {
+.page-buttons .fleche-droite {
 	right: 4%;
 }
