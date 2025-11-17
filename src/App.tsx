@@ -1,7 +1,6 @@
 import { useState } from "react";
 import IngredientMap from "./components/IngredientMap";
 import MapDisplay from "./components/MapDisplay";
-import IngredientList from "./components/ingredients/IngredientList";
 import "./components/ingredients/IngredientCard.css";
 import "./components/ingredients/IngredientList.css";
 import DetailIngredient from "./components/DetailIngredient";

@@ -1,15 +1,14 @@
 import { useState } from "react";
-import ItemCard from "./ItemCard";
 import type { ItemListProps } from "../../type";
-import "./ItemList.css"
-
+import ItemCard from "./ItemCard";
+import "./ItemList.css";
 
 function ItemList({ items, type }: ItemListProps) {
 	const [page, setPage] = useState(0);
 	const [counts, setCounts] = useState<{ [id: number]: number }>({});
-    
+
 	const itemsPerPage = 16;
-    
+
 	const incrementCount = (id: number) => {
 		setCounts((prev) => ({
 			...prev,
@@ -19,7 +18,7 @@ function ItemList({ items, type }: ItemListProps) {
 
 	const startIndex = page * itemsPerPage;
 	const endIndex = startIndex + itemsPerPage;
-    
+
 	const currentItems = items.slice(startIndex, endIndex);
 	const totalPages = Math.ceil(items.length / itemsPerPage);
 
@@ -27,7 +26,10 @@ function ItemList({ items, type }: ItemListProps) {
 		<section className="item-list-wrapper">
 			<div className="item-list">
 				{currentItems.map((item) => (
-					<ItemCard key={item.id} item={item} type={type}
+					<ItemCard
+						key={item.id}
+						item={item}
+						type={type}
 						count={counts[item.id] || 0}
 						onIncrement={() => incrementCount(item.id)}
 					/>

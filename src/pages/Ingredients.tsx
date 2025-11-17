@@ -7,15 +7,13 @@ function Ingredients() {
 	const INGREDIENTS_API = import.meta.env.VITE_API_INGREDIENTS;
 
 	useEffect(() => {
-		fetch (INGREDIENTS_API)
-			.then ((res) => res.json())
-			.then ((data: Ingredient[]) => setIngredients(data))
+		fetch(INGREDIENTS_API)
+			.then((res) => res.json())
+			.then((data: Ingredient[]) => setIngredients(data))
 			.catch((error) => console.error("Erreur lors du chargement"));
 	}, []);
 
-	return (
-		<ItemList items= {ingredients} type="ingredient" />
-	)
+	return <ItemList items={ingredients} type="ingredient" />;
 }
 
-export default Ingredients; 
+export default Ingredients;
