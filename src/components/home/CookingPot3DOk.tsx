@@ -4,7 +4,7 @@ import { useRef } from "react";
 import type { Group } from "three";
 
 function PotModel() {
-	const gltf = useGLTF("/models/CookingPot3D.glb");
+	const gltf = useGLTF("/models/CookingPot3DOk.glb");
 	const ref = useRef<Group>(null);
 
 	// Rotation

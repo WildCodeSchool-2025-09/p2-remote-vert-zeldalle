@@ -6,7 +6,7 @@ import homeButton from "../assets/home-picture/homeButton.webp";
 import HomeMuteOn from "../assets/home-picture/homeButtonMuteOn.png";
 import homeSurtitle from "../assets/home-picture/homeSurtitle.png";
 import homeSymbolTriforce from "../assets/home-picture/homeSymbolTriforce.png";
-import CookingPot3D from "../components/CookingPot3D";
+import CookingPot3DOk from "../components/home/CookingPot3DOk";
 
 function Home() {
 	const navigate = useNavigate();
@@ -70,7 +70,7 @@ function Home() {
 					<div className="homeCards">
 						<img src={homeSymbolTriforce} alt="Symbole Triforce" />
 
-						<CookingPot3D />
+						<CookingPot3DOk />
 
 						<button
 							className="homeButtonEnter"

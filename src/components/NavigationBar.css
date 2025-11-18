@@ -1,0 +1,50 @@
+/* --- Conteneur de la barre --- */
+.navigate-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+
+  height: 85px;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  background: rgba(0, 0, 0, 0.40); /* léger transparent type Zelda */
+  backdrop-filter: blur(6px);
+
+  z-index: 1000;
+}
+
+/* --- Style des liens (boutons) --- */
+.navigate-bar a {
+  display: flex;
+  flex-direction: column;       /* icône au-dessus du texte */
+  align-items: center;
+  justify-content: center;
+
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 0.9rem;
+
+  gap: 3px;
+
+  transform: scale(1);           /* taille normale */
+  transition: transform 0.25s ease, color 0.25s ease;
+}
+
+/* --- Icônes --- */
+.navigate-bar a img {
+  width: 28px;     /* ajuste selon ton design Figma */
+  height: 28px;
+  object-fit: contain;
+
+  pointer-events: none;
+}
+
+/* --- Bouton actif (effet Zelda) --- */
+.navigate-bar a.active {
+  transform: scale(1.25);        /* effet agrandi */
+  color: #ffd37a;                /* doré Zelda */
+}
