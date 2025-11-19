@@ -1,54 +1,25 @@
 import { useEffect, useState } from "react";
-import { IngredientType } from "./type/IngredientType";
+import type { IngredientType } from ".../type/";
 
 interface MapProps {
-	onSelect: (ingredient: Ingredient) => void;
+  onSelect: (ingredient: IngredientType) => void;
 }
 
 export default function IngredientMap({ onSelect }: MapProps) {
-	const [ingredients, setIngredients] = useState<Ingredient[]>([]);
+  const [ingredients, setIngredients] = useState<IngredientType[]>([]);
 
-	useEffect(() => {
-		async function fetchIngredients() {
-			try {
-				const response = await fetch(import.meta.env.VITE_API_INGREDIENTS);
+  useEffect(() => {
+    fetch(import.meta.env.VITE_API_INGREDIENTS)
+      .then(res => res.json())
+      .then(data => {
+        const mapPixels = data.map(ingredient => ({
+          ...ingredient,
+          x_pixel: (ingredient.coords.x / 100) * 3200,
+          y_pixel: (ingredient.coords.y / 100) * 2400,
+        }));
+        setIngredients(mapPixels);
+      });
+  }, []);
 
-				if (!response.ok) {
-					console.error("Erreur HTTP :", response.status);
-					return;
-				}
-
-				const text = await response.text();
-				const data: Ingredient[] = JSON.parse(text);
-
-				const mapPixels = data.map((ingredient) => ({
-					...ingredient,
-					x_pixel: (ingredient.coords.x / 100) * 3200,
-					y_pixel: (ingredient.coords.y / 100) * 2400,
-				}));
-
-				setIngredients(mapPixels);
-			} catch (err) {
-				console.error("Erreur de récupération :", err);
-			}
-		}
-
-		fetchIngredients();
-	}, []);
-
-	return (
-		<div>
-			{ingredients.length === 0 && <p>Chargement des ingrédients…</p>}
-
-			{ingredients.map((ingredient) => (
-				<div key={ingredient.id}>
-					<span>{ingredient.name}</span>
-					<br />
-					<button type="button" onClick={() => onSelect(ingredient)}>
-						Voir sur la carte
-					</button>
-				</div>
-			))}
-		</div>
-	);
+  return 
 }

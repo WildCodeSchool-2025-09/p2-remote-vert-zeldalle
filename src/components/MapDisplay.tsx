@@ -1,25 +1,23 @@
+import type { Ingredient } from "../type";
+
 interface MapDisplayProps {
-	ingredient: Ingredient | null;
+	ingredient: Ingredient;
 }
 
+const ZOOM_WIDTH = 750;
+const ZOOM_HEIGHT = 500;
+
 export default function MapDisplay({ ingredient }: MapDisplayProps) {
-	if (!ingredient) return null;
-
-	const ZOOM_WIDTH = 800;
-	const ZOOM_HEIGHT = 600;
-
 	const xOffset = (ingredient.x_pixel ?? 0) - ZOOM_WIDTH / 2;
 	const yOffset = (ingredient.y_pixel ?? 0) - ZOOM_HEIGHT / 2;
 
 	return (
 		<div
 			style={{
-				position: "relative",
 				width: ZOOM_WIDTH,
 				height: ZOOM_HEIGHT,
 				overflow: "hidden",
-				border: "2px solid #333",
-				marginTop: "20px",
+				position: "relative",
 			}}
 		>
 			<img

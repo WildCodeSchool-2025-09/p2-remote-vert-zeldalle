@@ -1,19 +1,21 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { Ingredient } from "../type";
 import ItemList from "../components/Items/ItemList";
-import type { Ingredient } from "../type";
+import IngredientMap from "../components/IngredientMap";
+import MapDisplay from "../components/MapDisplay";
+import DetailIngredient from "../components/DetailIngredient";
 
-function Ingredients() {
-	const [ingredients, setIngredients] = useState<Ingredient[]>([]);
-	const INGREDIENTS_API = import.meta.env.VITE_API_INGREDIENTS;
+export default function Ingredients() {
+  const [selectedIngredient, setSelectedIngredient] = useState<Ingredient | null>(null);
 
-	useEffect(() => {
-		fetch(INGREDIENTS_API)
-			.then((res) => res.json())
-			.then((data: Ingredient[]) => setIngredients(data))
-			.catch((error) => console.error("Erreur lors du chargement"));
-	}, []);
+  return (
+    <div>
+      <h1>Ingrédients</h1>
+      <ItemList type="ingredient" onSelect={setSelectedIngredient} />
 
-	return <ItemList items={ingredients} type="ingredient" />;
+      <IngredientMap onSelect={setSelectedIngredient} />
+
+      {selectedIngredient && <DetailIngredient ingredient={selectedIngredient} />}
+    </div>
+  );
 }
-
-export default Ingredients;
