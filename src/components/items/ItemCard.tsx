@@ -5,11 +5,15 @@ import "./ItemCard.css";
 function ItemCard({ item, type }: ItemCardProps) {
 	if (type === "ingredient") {
 		const ingredient = item as Ingredient;
-		const { addIngredient }= useInventory();
+		const { addIngredient } = useInventory();
 
 		return (
 			<div className="item-card">
-				<button type="button" onClick={() => addIngredient(item)} className="item-card-button">
+				<button
+					type="button"
+					onClick={() => addIngredient(item)}
+					className="item-card-button"
+				>
 					<img
 						src={`/images/ingredients/${ingredient.image}`}
 						alt={ingredient.name}

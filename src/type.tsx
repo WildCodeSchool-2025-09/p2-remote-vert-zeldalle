@@ -38,7 +38,7 @@ export interface ItemListProps {
 }
 
 export interface InventoryItemProps {
-	id : number;
+	id: number;
 	name: string;
 	image: string;
-};
+}
