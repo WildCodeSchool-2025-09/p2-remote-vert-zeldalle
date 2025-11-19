@@ -30,9 +30,16 @@ export interface ItemCardProps {
 	type: "ingredient" | "recipe";
 	count: number;
 	onIncrement: () => void;
+	onSelect: (selection: { item: Recipe | Ingredient; type: string }) => void;
 }
 
 export interface ItemListProps {
 	items: (Ingredient | Recipe)[];
 	type: "ingredient" | "recipe";
+}
+
+export interface DetailItemProps {
+	item: Recipe | Ingredient;
+	type: "recipe" | "ingredient";
+	ingredients: Ingredient[];
 }

@@ -16,20 +16,3 @@
 	height: 90%;
 	object-fit: contain;
 }
-
-/*.item-card p {
-	position: absolute; 
-	top: -50%; 
-	right: -15%; 
-	background-color: whitesmoke; 
-	color: black; 
-	font-weight: bold;
-	font-size: 14px;
-	width: 24px; 
-	height: 24px; 
-	border-radius: 50%; 
-	display: flex;
-	align-items: center;
-	justify-content: center; 
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}*/

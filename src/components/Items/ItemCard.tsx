@@ -1,29 +1,37 @@
 import type { Ingredient, ItemCardProps, Recipe } from "../../type";
 import "./ItemCard.css";
 
-function ItemCard({ item, type }: ItemCardProps) {
+function ItemCard({ item, type, onSelect }: ItemCardProps) {
 	if (type === "ingredient") {
 		const ingredient = item as Ingredient;
 
 		return (
-			<div className="item-card">
+			<button
+				type="button"
+				className="item-card"
+				onClick={() => onSelect({ item: ingredient, type: "ingredient" })}
+			>
 				<img
 					src={`/images/ingredients/${ingredient.image}`}
 					alt={ingredient.name}
 				/>
-			</div>
+			</button>
 		);
 	}
+
 	if (type === "recipe") {
 		const recipe = item as Recipe;
 
 		return (
-			<div className="item-card">
+			<button
+				type="button"
+				className="item-card"
+				onClick={() => onSelect({ item: recipe, type: "recipe" })}
+			>
 				<img src={`/images/recipes/${recipe.image}`} alt={recipe.name} />
-			</div>
+			</button>
 		);
 	}
-
 	return null;
 }
 
