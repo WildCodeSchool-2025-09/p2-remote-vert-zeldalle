@@ -26,7 +26,7 @@ export interface Ingredient {
 }
 
 export interface ItemCardProps {
-	item: Ingredient | Recipe;
+	items: Ingredient | Recipe;
 	type: "ingredient" | "recipe";
 	count: number;
 	onIncrement: () => void;

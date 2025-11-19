@@ -2,16 +2,17 @@ import "./DetailIngredient.css";
 import { useState } from "react";
 import "./Items/ItemList.css";
 import type { Ingredient } from "../type";
+import { useInventory } from "../contexts/InventoryContext";
 
 interface DetailIngredientProps {
 	ingredient: Ingredient;
 }
+const { addIngredient } = useInventory();
 
 export default function DetailIngredient({
 	ingredient,
 }: DetailIngredientProps) {
 	const [count, setCount] = useState(0);
-	/*const [showItemList, setShowItemList] = useState(true);*/
 
 	if (!ingredient) {
 		return <p>Aucun ingrédient sélectionné</p>;
@@ -57,23 +58,10 @@ export default function DetailIngredient({
 					</button>
 
 					<div className="CounterButtons">
-						<button
-							type="button"
-							className="BtnMinus"
-							onClick={() => {
-								if (count > 0) setCount(count - 1);
-							}}
-						>
-							–
-						</button>
+						<button type="button" className="BtnMinus" onClick={() => {
+								if (count > 0) setCount(count - 1);}}>–</button>
 						<p className="CountNumber">{count}</p>
-						<button
-							type="button"
-							className="BtnPlus"
-							onClick={() => setCount(count + 1)}
-						>
-							+
-						</button>
+						<button type="button" className="BtnPlus" onClick={() => setCount(count + 1)}>+</button>
 					</div>
 				</div>
 			</div>

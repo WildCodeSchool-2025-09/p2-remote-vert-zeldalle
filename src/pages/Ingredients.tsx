@@ -2,10 +2,9 @@ import { useEffect, useState } from "react";
 import ItemList from "../components/items/ItemList";
 import type { Ingredient } from "../type";
 
-const INGREDIENTS_API = "http://localhost:3000/ingredients"; // adapte si nécessaire
-
 export default function Ingredients() {
 	const [ingredients, setIngredients] = useState<Ingredient[]>([]);
+	const INGREDIENTS_API = import.meta.env.VITE_API_INGREDIENTS;
 
 	useEffect(() => {
 		fetch(INGREDIENTS_API)
