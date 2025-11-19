@@ -16,12 +16,12 @@ export interface Ingredient {
 	name: string;
 	description: string;
 	category: string;
-	effects: string;
+	effect: string;
 	hearts: number;
 	found_in: string;
 	coords: { x: number; y: number };
 	image: string;
-	effects_image: string;
+	effect_image: string;
 	hearts_image: string;
 }
 

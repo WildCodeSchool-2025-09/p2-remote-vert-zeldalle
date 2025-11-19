@@ -1,25 +1,23 @@
-import { useInventory } from "../../contexts/InventoryContext";
 import type { Ingredient, ItemCardProps, Recipe } from "../../type";
 import "./ItemCard.css";
+
+interface ItemCardProps {
+  item: Ingredient | Recipe;
+  type: "ingredient" | "recipe";
+  count?: number;
+  onIncrement?: () => void;
+  onSelect?: (item: Ingredient | Recipe) => void;
+}
 
 function ItemCard({ item, type }: ItemCardProps) {
 	if (type === "ingredient") {
 		const ingredient = item as Ingredient;
-		const { addIngredient } = useInventory();
 
 		return (
-			<div className="item-card">
-				<button
-					type="button"
-					onClick={() => addIngredient(item)}
-					className="item-card-button"
-				>
-					<img
-						src={`/images/ingredients/${ingredient.image}`}
-						alt={ingredient.name}
-					/>
-				</button>
-			</div>
+// biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
+<div className="item-card" onClick={() => onselect?.(item)}>
+  <img src={`/ingredientsImg/${ingredient.image}`} alt={ingredient.name} />
+</div>
 		);
 	}
 	if (type === "recipe") {
@@ -27,10 +25,25 @@ function ItemCard({ item, type }: ItemCardProps) {
 
 		return (
 			<div className="item-card">
-				<img src={`/images/recipes/${recipe.image}`} alt={recipe.name} />
+				<img src={`/recipeImg/${recipe.image}`} alt={recipe.name} />
 			</div>
 		);
 	}
+	/*return (
+		<button
+			className="item-card"
+			/*onClick={onIncrement}
+			onKeyDown={(event) => {
+				if (event.key === "Enter" || event.key === " ") {
+					onIncrement();
+				}
+			}}
+			type="button">
+			<img src={`/ingredientsImg/${item.image}`} alt={item.name} />
+			<p>{count}</p>
+		</button>*/
+
+	return null;
 }
 
 export default ItemCard;
