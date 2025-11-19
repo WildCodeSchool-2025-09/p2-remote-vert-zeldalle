@@ -36,3 +36,9 @@ export interface ItemListProps {
 	items: (Ingredient | Recipe)[];
 	type: "ingredient" | "recipe";
 }
+
+export interface InventoryItemProps {
+	id : number;
+	name: string;
+	image: string;
+};
