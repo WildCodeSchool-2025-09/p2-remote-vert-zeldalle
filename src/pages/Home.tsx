@@ -1,54 +1,46 @@
 import { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router";
 import "./Home.css";
+
 import HomeMuteOff from "../assets/home-picture/HomeButtonMuteOff.png";
 import homeButton from "../assets/home-picture/homeButton.webp";
 import HomeMuteOn from "../assets/home-picture/homeButtonMuteOn.png";
 import homeSurtitle from "../assets/home-picture/homeSurtitle.png";
 import homeSymbolTriforce from "../assets/home-picture/homeSymbolTriforce.png";
+
+import { Link } from "react-router-dom";
 import CookingPot3DOk from "../components/home/CookingPot3DOk";
 
 function Home() {
-	const navigate = useNavigate();
-	const goToInventory = () => {
-		navigate("/inventaire");
-	};
-
-	// Audio reference
 	const audioRef = useRef<HTMLAudioElement | null>(null);
 	const [isMuted, setIsMuted] = useState(true);
 
-	// Autoplay compatible mobile
+	// Play music on load (autoplay fix mobile)
 	useEffect(() => {
-		const audio = audioRef.current;
-		if (!audio) return;
+		if (!audioRef.current) return;
 
-		audio.volume = 0.4;
-		audio.muted = true;
-
-		audio.play().catch(() => {});
+		audioRef.current.volume = 0.4;
+		audioRef.current.muted = true;
+		audioRef.current.play().catch(() => {});
 	}, []);
 
-	// Toggle mute
+	// Toggle mute / unmute
 	const toggleMute = () => {
-		const audio = audioRef.current;
-		if (!audio) return;
+		if (!audioRef.current) return;
 
 		const newMuted = !isMuted;
 		setIsMuted(newMuted);
-		audio.muted = newMuted;
 
-		// Si on UNMUTE, on s'assure que la musique joue
+		audioRef.current.muted = newMuted;
+
 		if (!newMuted) {
-			audio.play().catch(() => {});
+			audioRef.current.play().catch(() => {});
 		}
 	};
 
 	return (
 		<>
-			{/* MUSIC */}
 			<audio ref={audioRef} src="/sounds/TitleTheme.mp3" loop>
-				<track kind="captions" />
+				<track kind="captions" src="" />
 			</audio>
 
 			{/* MUTE BUTTON */}
@@ -72,15 +64,9 @@ function Home() {
 
 						<CookingPot3DOk />
 
-						<button
-							className="homeButtonEnter"
-							type="button"
-							onClick={goToInventory}
-						>
-							<div className="shine-wrapper">
-								<img src={homeButton} alt="Enter" />
-							</div>
-						</button>
+						<Link to="/inventory" className="homeButtonEnter">
+							<img src={homeButton} alt="Enter" />
+						</Link>
 					</div>
 				</div>
 			</div>
