@@ -1,11 +1,9 @@
-
 import { Outlet, useLocation } from "react-router-dom";
 import "./App.css";
 
 import NavigateBar from "./components/NavigationBar";
 
 function App() {
-
 	const location = useLocation();
 
 	// Cacher la navigation uniquement sur la home
@@ -14,7 +12,7 @@ function App() {
 	return (
 		<>
 			{!hideNav && <NavigateBar />}
-			<Outlet /> 
+			<Outlet />
 		</>
 	);
 }
