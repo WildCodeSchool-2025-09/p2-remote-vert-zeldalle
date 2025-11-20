@@ -22,7 +22,7 @@
 
 /* --- TITRE --- */
 .choiceTitle {
-	font-family: "Hylia", sans-serif;
+	font-family: var(--font-family-title);
 	font-size: 1.8rem;
 	color: #ffd970;
 }
@@ -73,7 +73,6 @@
 @media (max-width: 350px) {
 	.choiceTitle {
 		font-size: 1.5rem;
-		font-family: "hylia", sans-serif;
 	}
 
 	.choiceImage {

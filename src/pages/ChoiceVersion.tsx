@@ -6,8 +6,10 @@ export default function ChoiceVersion() {
 	const navigate = useNavigate();
 
 	const startBreathVersion = () => {
-		// Déclenchement de la musique globale
+		// 🔥 Déclenche la musique dans MuteButton
 		window.dispatchEvent(new Event("start-music"));
+
+		// Navigue vers la Home
 		navigate("/home");
 	};
 
@@ -19,7 +21,7 @@ export default function ChoiceVersion() {
 
 			<img
 				src={cuisineLink}
-				alt="Illustration de Link qui cuisine"
+				alt="Illustration de Link qui cuisine un repas"
 				className="choiceImage"
 			/>
 
