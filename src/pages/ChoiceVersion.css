@@ -1,0 +1,87 @@
+/* -------------------------------------
+   CHOICE VERSION — MOBILE FIRST PRO
+------------------------------------- */
+
+.choiceScreen {
+	width: 100vw;
+	min-height: 100dvh; /* FIX CENTRAGE */
+	display: flex;
+	flex-direction: column;
+	justify-content: center; /* FIX CENTRAGE */
+	align-items: center; /* FIX CENTRAGE */
+
+	padding: 1.5rem;
+	gap: 2rem;
+
+	text-align: center;
+	background: rgba(0, 0, 0, 0.45);
+
+	position: relative; /* IMPORTANT */
+	z-index: 2; /* Par dessus le bg global */
+}
+
+/* --- TITRE --- */
+.choiceTitle {
+	font-family: "Hylia", sans-serif;
+	font-size: 1.8rem;
+	color: #ffd970;
+}
+
+/* --- IMAGE --- */
+.choiceImage {
+	width: 60%;
+	max-width: 16rem;
+	min-width: 9rem;
+	object-fit: contain;
+}
+
+/* --- CONTENEUR BOUTONS --- */
+.choiceButtons {
+	display: flex;
+	flex-direction: column;
+	gap: 1.2rem;
+	width: 100%;
+	max-width: 20rem;
+}
+
+/* --- BUTTON --- */
+.choiceBtn {
+	background: #2e1d0e;
+	border: 2px solid #d4b46a;
+	color: #ffd970;
+	padding: 0.75rem 1.2rem;
+	border-radius: 12px;
+	font-size: 1.1rem;
+	font-family: inherit;
+	cursor: pointer;
+	transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.choiceBtn:hover {
+	transform: scale(1.05);
+}
+
+/* Disabled */
+.choiceBtn.disabled,
+.choiceBtn:disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
+	pointer-events: none;
+}
+
+/* --- MINI MOBILE --- */
+@media (max-width: 350px) {
+	.choiceTitle {
+		font-size: 1.5rem;
+		font-family: "hylia", sans-serif;
+	}
+
+	.choiceImage {
+		width: 70%;
+	}
+
+	.choiceBtn {
+		font-size: 1rem;
+		padding: 0.65rem 1rem;
+	}
+}

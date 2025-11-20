@@ -1,0 +1,66 @@
+.navContainer {
+	position: fixed;
+	bottom: -35px; /* cache le bas de la card */
+	left: 50%;
+	transform: translateX(-50%);
+	display: flex;
+	justify-content: center;
+	align-items: flex-end;
+	gap: 0;
+	z-index: 2000;
+	pointer-events: none;
+}
+
+/*Card de navigation*/
+.navCard {
+	pointer-events: all;
+
+	display: flex;
+	flex-direction: row; /* icône + texte sur la même ligne */
+	align-items: flex-start; /*reste en haut de la card*/
+	justify-content: flex-start;
+
+	gap: 6px;
+
+	width: 110px; /* Taille largeur card*/
+	height: 60px;
+	padding: 10px 12px 0 12px;
+
+	background: rgba(0, 0, 0, 0.6);
+	background-image: linear-gradient(
+		to top,
+		rgba(0, 0, 0, 0.7),
+		rgba(0, 0, 0, 0.3)
+	);
+
+	border: 2px solid rgba(180, 180, 180, 0.35);
+	border-bottom: none; /* 🔥 invisible en bas */
+	border-radius: 18px 18px 0 0;
+
+	color: white;
+	font-family: "Hylia", sans-serif;
+	text-decoration: none;
+
+	transition: height 0.25s ease;
+}
+
+/* reglage icons card navigation*/
+.navCard img {
+	width: 24px;
+	height: 24px; /*taille des icones*/
+	object-fit: contain;
+}
+
+/* reglage texte Card navigation*/
+.navCard span {
+	font-size: 0.9rem;
+	margin-top: 2px;
+	white-space: nowrap;
+}
+
+/*Card style Pop-up quand selectionner*/
+.navCard.active {
+	height: 70px;
+	border-color: rgba(255, 215, 130, 0.9);
+	color: #ffe7b0;
+}
