@@ -1,9 +1,9 @@
-import { Outlet, useLocation } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
-import "./App.css";
+import { Outlet, useLocation } from "react-router-dom";
 
-import NavigateBar from "./components/NavigationBar";
+import "./App.css";
 import MuteButton from "./components/Mutebutton";
+import NavigateBar from "./components/NavigationBar";
 
 function App() {
 	const location = useLocation();
