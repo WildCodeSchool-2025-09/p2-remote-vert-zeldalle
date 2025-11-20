@@ -1,18 +1,16 @@
-
 .ingredient-detail {
 	position: relative;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin: 1.8em;
+	margin: 1em;
 
 	background-color: rgb(255, 255, 255);
 	border-radius: 10px;
 	box-shadow: inset 0px 0px 5px 2px rgba(0, 0, 0, 0.5);
-		padding: 0.5em;
+	padding: 0.5em;
 	font-size: 12px;
 	gap: 10px;
-
 }
 .ImageIngredient {
 	display: flex;
@@ -22,11 +20,12 @@
 	position: relative;
 	isolation: isolate;
 	z-index: 10;
-	width: max(25%);
-
+	width: max(20%);
+	margin-left: 15px;
 }
 .ImageIngredientsetting {
 	z-index: 100;
+	width: 70px;
 }
 .ImageEffectsetting {
 	display: flex;
@@ -36,20 +35,18 @@
 	position: relative;
 	isolation: isolate;
 	z-index: 10;
-		flex-direction: column;
-
+	flex-direction: column;
 }
 
 .ImageEffectsetting ::after {
 	content: "";
 	position: absolute;
-inset: 0;
+	inset: 0;
 	border-radius: 10px;
 	z-index: 1;
 	opacity: 0.5;
 	padding: 0;
 	margin: 0;
-
 }
 
 .ImageEffect {
@@ -62,32 +59,30 @@ inset: 0;
 	margin: 0.2em;
 	width: 40px;
 	flex-direction: column;
-		background-color: rgb(36, 35, 35);
-
+	background-color: rgb(36, 35, 35);
 }
 .ImageEffect ::after {
 	content: "";
-position: absolute;
-inset: 0;
+	position: absolute;
+	inset: 0;
 	border-radius: 10px;
 	z-index: 1;
 	opacity: 0.5;
 }
 
-
 .ImageIngredient::after {
 	content: "";
-position: absolute;
-inset: 0;
+	position: absolute;
+	inset: 0;
 	border-radius: 10px;
 	z-index: 1;
 	background-color: rgb(36, 35, 35);
 	opacity: 0.5;
 }
 h4 {
-    margin: 0;
-    margin-block-start: 0;
-    margin-block-end: 10px;
+	margin: 0;
+	margin-block-start: 0;
+	margin-block-end: 10px;
 }
 .NomIngredient {
 	display: flex;
@@ -101,7 +96,7 @@ h4 {
 .NomIngredient p {
 	display: flex;
 	align-items: flex-start;
-	}
+}
 .InfoIngredient {
 	display: flex;
 	gap: 10px;
@@ -114,7 +109,7 @@ h4 {
 	align-items: center;
 	flex-direction: column;
 	margin: 0 !important;
-	padding: 0.5em;
+	padding: 0.em;
 }
 
 .page-buttons button {
@@ -138,35 +133,53 @@ h4 {
 	right: 4%;
 }
 .CounterButtons {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+	display: flex;
+	align-items: center;
+	gap: 10px;
 }
 
 .CountNumber {
-  width: 30px;
-  text-align: center;
-  font-size: 20px;
-  font-weight: bold;
+	width: 30px;
+	text-align: center;
+	font-size: 20px;
+	font-weight: bold;
 }
 
 .BtnMinus,
 .BtnPlus {
-  width: 45px;
-  height: 45px;
-  border-radius: 8px;
-  border: none;
-  font-size: 22px;
-  cursor: pointer;
-  font-weight: bold;
-  background-color: #f4f4f4;
-  transition: 0.2s;
+	width: 45px;
+	height: 45px;
+	border-radius: 8px;
+	border: none;
+	font-size: 22px;
+	cursor: pointer;
+	font-weight: bold;
+	background-color: #f4f4f4;
+	transition: 0.2s;
 }
 
 .BtnMinus:hover,
 .BtnPlus:hover {
-  background-color: #ddd;
+	background-color: #ddd;
 }
-.MapButton { 
+.MapButton {
 	border-radius: 8px;
+}
+.modal-overlay {
+	position: fixed;
+	inset: 0;
+	background-color: rgba(0, 0, 0, 0.7);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 1000;
+}
+
+.modal-content {
+	border-radius: 8px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.Mapcard {
+	border-radius: 18px;
 }

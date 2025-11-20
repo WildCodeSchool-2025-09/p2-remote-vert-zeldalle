@@ -1,23 +1,18 @@
 import type { Ingredient, ItemCardProps, Recipe } from "../../type";
 import "./ItemCard.css";
 
-interface ItemCardProps {
-  item: Ingredient | Recipe;
-  type: "ingredient" | "recipe";
-  count?: number;
-  onIncrement?: () => void;
-  onSelect?: (item: Ingredient | Recipe) => void;
-}
-
 function ItemCard({ item, type }: ItemCardProps) {
 	if (type === "ingredient") {
 		const ingredient = item as Ingredient;
 
 		return (
-// biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
-<div className="item-card" onClick={() => onselect?.(item)}>
-  <img src={`/ingredientsImg/${ingredient.image}`} alt={ingredient.name} />
-</div>
+			// biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
+			<div className="item-card" onClick={() => onselect?.(item)}>
+				<img
+					src={`/ingredientsImg/${ingredient.image}`}
+					alt={ingredient.name}
+				/>
+			</div>
 		);
 	}
 	if (type === "recipe") {
