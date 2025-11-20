@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import "./App.css";
 
-import MuteButton from "./components/Mutebutton";
+import MuteButton from "./components/MuteButton";
 import NavigateBar from "./components/NavigationBar";
 
 function App() {

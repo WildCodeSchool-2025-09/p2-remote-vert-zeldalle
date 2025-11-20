@@ -3,19 +3,10 @@ import type { ItemListProps } from "../../type";
 import ItemCard from "./ItemCard";
 import "./ItemList.css";
 
-function ItemList({ items, type }: ItemListProps) {
+function ItemList({ items, type, onSelect }: ItemListProps) {
 	const [page, setPage] = useState(0);
-	const [totalItems, setTotalItems] = useState<{ [id: number]: number }>({});
 
 	const itemsPerPage = 16;
-
-	const incrementCount = (id: number) => {
-		setTotalItems((prev) => ({
-			...prev,
-			[id]: (prev[id] || 0) + 1,
-		}));
-	};
-
 	const startIndex = page * itemsPerPage;
 	const endIndex = startIndex + itemsPerPage;
 
@@ -26,13 +17,7 @@ function ItemList({ items, type }: ItemListProps) {
 		<section className="item-list-wrapper">
 			<div className="item-list">
 				{currentItems.map((item) => (
-					<ItemCard
-						key={item.id}
-						item={item}
-						type={type}
-						count={totalItems[item.id] || 0}
-						onIncrement={() => incrementCount(item.id)}
-					/>
+					<ItemCard key={item.id} item={item} type={type} onSelect={onSelect} />
 				))}
 			</div>
 
@@ -45,6 +30,7 @@ function ItemList({ items, type }: ItemListProps) {
 				>
 					<img src="/images/nav/left.png" alt="flèche gauche" />
 				</button>
+
 				<button
 					type="button"
 					className="right-arrow"

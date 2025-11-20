@@ -1,17 +1,26 @@
 import { useEffect, useState } from "react";
 import ItemList from "../components/items/ItemList";
+import { useInventory } from "../contexts/InventoryContext";
 import type { Ingredient } from "../type";
 
 export default function Ingredients() {
 	const [ingredients, setIngredients] = useState<Ingredient[]>([]);
-	const INGREDIENTS_API = import.meta.env.VITE_API_INGREDIENTS;
+	const { addIngredient } = useInventory();
+
+	const API = import.meta.env.VITE_API_INGREDIENTS;
 
 	useEffect(() => {
-		fetch(INGREDIENTS_API)
+		fetch(API)
 			.then((res) => res.json())
 			.then((data: Ingredient[]) => setIngredients(data))
-			.catch(() => console.error("Erreur lors du chargement"));
-	}, []);
+			.catch(() => console.error("Erreur chargement ingrédients"));
+	}, []); // ← OK : pas besoin de dépendances
 
-	return <ItemList items={ingredients} type="ingredient" />;
+	const handleSelect = ({ item }: { item: Ingredient }) => {
+		addIngredient(item);
+	};
+
+	return (
+		<ItemList items={ingredients} type="ingredient" onSelect={handleSelect} />
+	);
 }

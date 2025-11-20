@@ -1,9 +1,11 @@
 import ItemCard from "../components/items/ItemCard";
 import { useInventory } from "../contexts/InventoryContext";
 
-const { inventory } = useInventory();
-
 function Inventory() {
+	const { inventory } = useInventory();
+
+	const handleSelect = () => {};
+
 	return (
 		<div className="inventory-list">
 			{inventory.map((item) => (
@@ -11,8 +13,7 @@ function Inventory() {
 					key={item.id}
 					item={item}
 					type="ingredient"
-					count={1}
-					addOne={() => {}}
+					onSelect={handleSelect}
 				/>
 			))}
 		</div>
