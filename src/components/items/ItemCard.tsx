@@ -12,6 +12,7 @@ function ItemCard({ item, type, onSelect }: ItemCardProps) {
 				<img
 					src={`/images/${type === "ingredient" ? "ingredients" : "recipes"}/${item.image}`}
 					alt={item.name}
+					onError={() => console.log("❌ Image introuvable :", item.image)}
 				/>
 			</button>
 		</div>

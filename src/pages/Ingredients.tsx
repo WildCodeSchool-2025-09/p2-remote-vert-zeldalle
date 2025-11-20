@@ -9,12 +9,16 @@ export default function Ingredients() {
 
 	const API = import.meta.env.VITE_API_INGREDIENTS;
 
+	console.log("🔎 URL API utilisée =", API); // TEST 1
+
 	useEffect(() => {
 		fetch(API)
 			.then((res) => res.json())
-			.then((data: Ingredient[]) => setIngredients(data))
-			.catch(() => console.error("Erreur chargement ingrédients"));
-	}, []); // ← OK : pas besoin de dépendances
+			.then((data: Ingredient[]) => {
+				setIngredients(data);
+			})
+			.catch(() => console.error("❌ Erreur chargement ingrédients"));
+	}, []);
 
 	const handleSelect = ({ item }: { item: Ingredient }) => {
 		addIngredient(item);
