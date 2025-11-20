@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
-
 import "./App.css";
+
 import MuteButton from "./components/Mutebutton";
 import NavigateBar from "./components/NavigationBar";
 
@@ -53,15 +53,20 @@ function App() {
 
 	return (
 		<>
+			{/* Audio global */}
 			<audio ref={audioRef} src="/sounds/TitleTheme.mp3" loop>
 				<track kind="captions" src="" label="no captions available" />
 			</audio>
+
+			{/* Bouton mute, masqué uniquement sur "/" */}
 			{!hideMuteButton && (
 				<MuteButton isMuted={isMuted} toggleMute={toggleMute} />
 			)}
 
+			{/* Navigation masquée sur "/" et "/home" */}
 			{!hideNavigation && <NavigateBar />}
 
+			{/* Pages */}
 			<Outlet />
 		</>
 	);

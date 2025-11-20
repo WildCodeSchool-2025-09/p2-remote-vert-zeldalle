@@ -1,9 +1,6 @@
 body {
-	width: 425px;
-	padding-left: 11, 76%;
-	padding-right: 11, 76%;
+	width: 100vw;
 	margin: 0 auto;
-	text-align: center;
 }
 
 :root {
@@ -11,7 +8,7 @@ body {
 	--font-size-title: 14px;
 	--font-family-base: "Roboto", sans-serif;
 	--font-family-title: "HyliaSerifBeta-Regular";
-	--color-overlay: rgba(0 0 0 0.5);
+	--color-overlay: rgba(0, 0, 0, 0.5);
 	--radius: 10px;
 	--text-color-light: white;
 	--text-color-dark: black;
