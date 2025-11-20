@@ -1,16 +1,18 @@
-/* --- BASE FULLSCREEN --- */
 html,
 body,
 :root {
-	margin: 0;
-	padding: 0;
-	width: 100%;
-	height: 100%;
-	overflow: hidden;
-	background-image: url(../assets/home-picture/homeBackground.png);
-	background-size: cover;
-	background-position: center;
-	background-repeat: no-repeat;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+  background-image: url("../assets/home-picture/homeBackground.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow-x: hidden;
+background-size: calc(100% + 15px) calc(100% + 15px);
+
 }
 
 /* --- Bouton mute --- */

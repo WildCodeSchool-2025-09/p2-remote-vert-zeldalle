@@ -1,5 +1,4 @@
 import { createBrowserRouter } from "react-router";
-
 import App from "./App";
 import Home from "./pages/Home";
 import Ingredients from "./pages/Ingredients";
