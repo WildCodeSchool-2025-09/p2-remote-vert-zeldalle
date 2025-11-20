@@ -58,13 +58,16 @@ export default function DetailIngredient({
 						<img src="/images/MapButton.png" alt="" />
 					</button>
 
-					{/* Modale */}
 					{isMapOpen && (
-						<div className="modal-overlay" onClick={() => setIsMapOpen(false)}>
+						<div
+							className="modal-overlay"
+							onKeyUp={() => setIsMapOpen(false)}
+							onClick={() => setIsMapOpen(false)}
+						>
 							<div
 								className="modal-content"
-								role="dialog"
 								aria-modal="true"
+								onKeyUp={(e) => e.stopPropagation()}
 								onClick={(e) => e.stopPropagation()}
 							>
 								<MapDisplay ingredient={ingredient} />
@@ -77,6 +80,7 @@ export default function DetailIngredient({
 						<button
 							type="button"
 							className="BtnMinus"
+							onKeyUp={() => count > 0 && setCount(count - 1)}
 							onClick={() => count > 0 && setCount(count - 1)}
 						>
 							–

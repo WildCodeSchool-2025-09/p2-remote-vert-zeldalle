@@ -21,5 +21,5 @@ export default function IngredientMap({ onSelect }: MapProps) {
 			});
 	}, []);
 
-	return <div style={{ width: 0, height: 0 }} onClick={() => {}} />;
+	return <div style={{ width: 0, height: 0 }} />;
 }

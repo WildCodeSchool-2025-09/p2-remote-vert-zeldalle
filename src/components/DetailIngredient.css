@@ -59,8 +59,9 @@
 	margin: 0.2em;
 	width: 40px;
 	flex-direction: column;
-	background-color: rgb(36, 35, 35);
+	background-color: rgba(0, 0, 0, 0.5);
 }
+
 .ImageEffect ::after {
 	content: "";
 	position: absolute;
