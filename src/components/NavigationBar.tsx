@@ -14,7 +14,7 @@ function NavigateBar() {
 	return (
 		<div className="navContainer">
 			<Link
-				to="/recipes"
+				to="/recettes"
 				className={`navCard ${recipesActive ? "active" : ""}`}
 			>
 				<img src={recipesIcon} alt="" />

@@ -28,23 +28,23 @@ export interface Ingredient {
 export interface ItemCardProps {
 	item: Ingredient | Recipe;
 	type: "ingredient" | "recipe";
-	onSelect: (data: {
-		item: Ingredient | Recipe;
-		type: "ingredient" | "recipe";
-	}) => void;
+	count: number;
+	onIncrement: () => void;
+	onSelect?: (selection: SelectedItem) => void;
 }
 
 export interface ItemListProps {
 	items: (Ingredient | Recipe)[];
 	type: "ingredient" | "recipe";
-	onSelect?: (data: {
-		item: Ingredient | Recipe;
-		type: "ingredient" | "recipe";
-	}) => void;
+	onSelect?: React.Dispatch<React.SetStateAction<SelectedItem | null>>;
 }
 
-export interface InventoryItemProps {
-	id: number;
-	name: string;
-	image: string;
+export interface DetailItemProps {
+	item: Recipe | Ingredient;
+	type: "recipe" | "ingredient";
+	ingredients: Ingredient[];
 }
+
+export type SelectedItem =
+	| { type: "recipe"; item: Recipe }
+	| { type: "ingredient"; item: Ingredient };

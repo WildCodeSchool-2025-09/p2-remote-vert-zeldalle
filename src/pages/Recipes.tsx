@@ -1,19 +1,38 @@
 import { useEffect, useState } from "react";
-import ItemList from "../components/items/ItemList";
-import type { Recipe } from "../type";
+import DetailItem from "../components/DetailItem";
+import ItemList from "../components/Items/ItemList";
+import { INGREDIENTS_API, RECIPES_API } from "../constants";
+import type { Ingredient, Recipe, SelectedItem } from "../type";
 
 function Recipes() {
 	const [recipes, setRecipes] = useState<Recipe[]>([]);
-	const RECIPES_API = import.meta.env.VITE_API_RECIPES;
+	const [ingredients, setIngredients] = useState<Ingredient[]>([]);
+	const [selectedItem, setSelectedItem] = useState<SelectedItem | null>(null);
 
 	useEffect(() => {
-		fetch(RECIPES_API)
-			.then((res) => res.json())
-			.then((data: Recipe[]) => setRecipes(data))
+		Promise.all([
+			fetch(RECIPES_API).then((res) => res.json()),
+			fetch(INGREDIENTS_API).then((res) => res.json()),
+		])
+			.then(([recipesData, ingredientsData]) => {
+				setRecipes(recipesData);
+				setIngredients(ingredientsData);
+			})
 			.catch(() => console.error("Erreur lors du chargement"));
 	}, []);
 
-	return <ItemList items={recipes} type="recipe" />;
+	return (
+		<>
+			<ItemList items={recipes} type="recipe" onSelect={setSelectedItem} />
+			{selectedItem && (
+				<DetailItem
+					item={selectedItem.item}
+					type={selectedItem.type}
+					ingredients={ingredients}
+				/>
+			)}
+		</>
+	);
 }
 
 export default Recipes;

@@ -1,23 +1,29 @@
 import { useEffect, useState } from "react";
-import type { Ingredient } from "../../type";
+import type { Ingredient, Recipe } from "../../type";
 import ItemCard from "./ItemCard";
 import "./ItemList.css";
 
 interface ItemListProps {
-	type: "ingredient";
-	onSelect: (ingredient: Ingredient) => void;
+	type: "ingredient" | "recipe";
+	onSelect: (item: Ingredient | Recipe) => void;
 }
 
 export default function ItemList({ type, onSelect }: ItemListProps) {
-	const [items, setItems] = useState<Ingredient[]>([]);
+	const [items, setItems] = useState<(Ingredient | Recipe)[]>([]);
 	const [page, setPage] = useState(0);
 	const itemsPerPage = 16;
 
 	useEffect(() => {
-		fetch(import.meta.env.VITE_API_INGREDIENTS)
+		const API =
+			type === "ingredient"
+				? import.meta.env.VITE_API_INGREDIENTS
+				: import.meta.env.VITE_API_RECIPES;
+
+		fetch(API)
 			.then((res) => res.json())
-			.then((data) => setItems(data));
-	}, []);
+			.then((data) => setItems(data))
+			.catch(() => console.error("❌ Erreur chargement items"));
+	}, [type]);
 
 	const currentItems = items.slice(
 		page * itemsPerPage,
@@ -29,36 +35,26 @@ export default function ItemList({ type, onSelect }: ItemListProps) {
 		<section className="item-list-wrapper">
 			<div className="item-list">
 				{currentItems.map((item) => (
-					<button
-						type="button"
-						key={item.id}
-						onClick={() => onSelect(item)}
-						style={{
-							cursor: "pointer",
-							border: "none",
-							background: "none",
-							padding: 0,
-						}}
-					>
-						<ItemCard item={item} type={type} />
-					</button>
+					<ItemCard key={item.id} item={item} type={type} onSelect={onSelect} />
 				))}
 			</div>
 
 			<div className="page-buttons">
 				<button
 					type="button"
+					className="left-arrow"
 					onClick={() => setPage(page - 1)}
 					disabled={page === 0}
 				>
-					&lt;
+					<img src="/images/nav/left.png" alt="flèche gauche" />
 				</button>
 				<button
 					type="button"
+					className="right-arrow"
 					onClick={() => setPage(page + 1)}
 					disabled={page + 1 >= totalPages}
 				>
-					&gt;
+					<img src="/images/nav/right.png" alt="flèche droite" />
 				</button>
 			</div>
 		</section>
