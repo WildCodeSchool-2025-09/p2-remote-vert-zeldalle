@@ -1,4 +1,4 @@
-import type { Ingredient, Recipe, ItemCardProps } from "../../type";
+import type { Ingredient, ItemCardProps, Recipe } from "../../type";
 import "./ItemCard.css";
 
 export default function ItemCard({ item, type, onSelect }: ItemCardProps) {
@@ -16,12 +16,10 @@ export default function ItemCard({ item, type, onSelect }: ItemCardProps) {
 	};
 
 	return (
-		<div
+		<button
+			type="button"
 			className="item-card"
-			role="button"
-			tabIndex={0}
 			onClick={handleClick}
-			onKeyDown={(e) => e.key === "Enter" && handleClick()}
 			style={{ cursor: "pointer" }}
 		>
 			<img
@@ -29,6 +27,6 @@ export default function ItemCard({ item, type, onSelect }: ItemCardProps) {
 				alt={item.name}
 				onError={() => console.warn("Image introuvable :", imagePath)}
 			/>
-		</div>
+		</button>
 	);
 }
