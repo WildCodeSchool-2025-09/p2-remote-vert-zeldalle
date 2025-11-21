@@ -52,7 +52,6 @@ export default function DetailIngredient({
 				</div>
 
 				<div className="RightDetails">
-					{/* Bouton pour ouvrir la modale */}
 					<button
 						type="button"
 						className="MapButton"

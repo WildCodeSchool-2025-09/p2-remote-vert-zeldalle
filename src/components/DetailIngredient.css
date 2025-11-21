@@ -41,7 +41,7 @@
 .ImageEffectsetting ::after {
 	content: "";
 	position: absolute;
-		inset: 0;
+	inset: 0;
 	border-radius: 10px;
 	z-index: 1;
 	opacity: 0.5;
@@ -64,8 +64,8 @@
 
 .ImageEffect ::after {
 	content: "";
-		position: absolute;
-		inset: 0;
+	position: absolute;
+	inset: 0;
 	border-radius: 10px;
 	z-index: 1;
 	opacity: 0.5;
@@ -73,8 +73,8 @@
 
 .ImageIngredient::after {
 	content: "";
-		position: absolute;
-		inset: 0;
+	position: absolute;
+	inset: 0;
 	border-radius: 10px;
 	z-index: 1;
 	background-color: rgb(36, 35, 35);
@@ -84,7 +84,6 @@ h4 {
 	margin: 0;
 	margin-block-start: 0;
 	margin-block-end: 10px;
-
 }
 .NomIngredient {
 	display: flex;
@@ -164,7 +163,7 @@ h4 {
 .BtnPlus:hover {
 	background-color: #ddd;
 }
-.MapButton { 
+.MapButton {
 	border-radius: 8px;
 }
 .modal-overlay {
@@ -175,11 +174,12 @@ h4 {
 	justify-content: center;
 	align-items: center;
 	z-index: 1000;
-transition-duration: 1s;}
+	transition-duration: 1s;
+}
 
 .modal-content {
 	border-radius: 8px;
-	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);	
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .CloseMapButton {
@@ -198,7 +198,6 @@ transition-duration: 1s;}
 	justify-content: center;
 	align-items: center;
 }
-
 
 .Mapcard {
 	display: flex;
