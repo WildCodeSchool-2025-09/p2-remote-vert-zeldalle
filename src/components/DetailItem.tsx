@@ -26,24 +26,25 @@ function DetailItem({ item, type, ingredients }: DetailItemProps) {
 					<p className="recipe-description">{recipe.description}</p>
 				</div>
 
-				<div className="">
-					<div className="ImageEffectsetting">
+				<div className="recipe-detail">
+					<div className="image-effect">
 						<img
 							src={`/images/effects/${recipe.effect_image}`}
 							alt={recipe.effect}
 						/>
+					</div>
 
-						<div className="heart-wrapper">
-							<img
-								src={`/images/effects/${recipe.heart_image}`}
-								alt="Rend des coeurs"
-							/>
-							<span className="heart-count">{recipe.hearts}</span>
-						</div>
+					<div className="heart-wrapper">
+						<img
+							src={`/images/effects/${recipe.heart_image}`}
+							alt="Rend des coeurs"
+						/>
+						<span className="heart-count">{recipe.hearts}</span>
+					</div>
 
+					<div className="effect-duration">
 						<img src="/images/effects/timerIcon.png" alt="Durée de l'effet" />
-
-						<span>{recipe.duration}</span>
+						<span className="text-duration">{recipe.duration}</span>
 					</div>
 
 					<article className="ingredient-img">

@@ -2,16 +2,12 @@ import { useEffect, useState } from "react";
 import DetailItem from "../components/DetailItem";
 import ItemList from "../components/Items/ItemList";
 import { INGREDIENTS_API, RECIPES_API } from "../constants";
-import type { Recipe } from "../type";
-import type { Ingredient } from "../type";
+import type { Ingredient, Recipe, SelectedItem } from "../type";
 
 function Recipes() {
 	const [recipes, setRecipes] = useState<Recipe[]>([]);
 	const [ingredients, setIngredients] = useState<Ingredient[]>([]);
-	const [selectedItem, setSelectedItem] = useState<{
-		item: Recipe | Ingredient;
-		type: string;
-	} | null>(null);
+	const [selectedItem, setSelectedItem] = useState<SelectedItem | null>(null);
 
 	useEffect(() => {
 		Promise.all([

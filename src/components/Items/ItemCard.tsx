@@ -9,7 +9,7 @@ function ItemCard({ item, type, onSelect }: ItemCardProps) {
 			<button
 				type="button"
 				className="item-card"
-				onClick={() => onSelect({ item: ingredient, type: "ingredient" })}
+				onClick={() => onSelect?.({ item: ingredient, type: "ingredient" })}
 			>
 				<img
 					src={`/images/ingredients/${ingredient.image}`}
@@ -26,7 +26,7 @@ function ItemCard({ item, type, onSelect }: ItemCardProps) {
 			<button
 				type="button"
 				className="item-card"
-				onClick={() => onSelect({ item: recipe, type: "recipe" })}
+				onClick={() => onSelect?.({ item: recipe, type: "recipe" })}
 			>
 				<img src={`/images/recipes/${recipe.image}`} alt={recipe.name} />
 			</button>

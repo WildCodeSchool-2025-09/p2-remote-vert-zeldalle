@@ -30,12 +30,13 @@ export interface ItemCardProps {
 	type: "ingredient" | "recipe";
 	count: number;
 	onIncrement: () => void;
-	onSelect: (selection: { item: Recipe | Ingredient; type: string }) => void;
+	onSelect?: (selection: SelectedItem) => void;
 }
 
 export interface ItemListProps {
 	items: (Ingredient | Recipe)[];
 	type: "ingredient" | "recipe";
+	onSelect?: React.Dispatch<React.SetStateAction<SelectedItem | null>>;
 }
 
 export interface DetailItemProps {
@@ -43,3 +44,7 @@ export interface DetailItemProps {
 	type: "recipe" | "ingredient";
 	ingredients: Ingredient[];
 }
+
+export type SelectedItem =
+	| { type: "recipe"; item: Recipe }
+	| { type: "ingredient"; item: Ingredient };
