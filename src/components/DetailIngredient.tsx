@@ -1,6 +1,8 @@
-import "./DetailIngredient.css";
 import { useState } from "react";
+import "./Items/ItemList.css";
+import { useInventory } from "../contexts/InventoryContext";
 import type { Ingredient } from "../type";
+import "./DetailIngredient.css";
 import MapDisplay from "./MapDisplay";
 
 interface DetailIngredientProps {
@@ -10,6 +12,7 @@ interface DetailIngredientProps {
 export default function DetailIngredient({
 	ingredient,
 }: DetailIngredientProps) {
+	const { addIngredient } = useInventory();
 	const [count, setCount] = useState(0);
 	const [isMapOpen, setIsMapOpen] = useState(false);
 
@@ -20,7 +23,7 @@ export default function DetailIngredient({
 			<div className="ImageIngredient">
 				<img
 					className="ImageIngredientsetting"
-					src={`/ingredientsImg/${ingredient.image}`}
+					src={`/images/ingredients/${ingredient.image}`}
 					alt={ingredient.name}
 				/>
 			</div>
@@ -65,14 +68,12 @@ export default function DetailIngredient({
 							onClick={() => setIsMapOpen(false)}
 						>
 							<button
-							className="CloseMapButton"
-							type="button"
-							onKeyUp={() => setIsMapOpen(false)}
-							onClick={() => setIsMapOpen(false)}
-							
+								className="CloseMapButton"
+								type="button"
+								onKeyUp={() => setIsMapOpen(false)}
+								onClick={() => setIsMapOpen(false)}
 							>
 								X
-
 							</button>
 							<div
 								className="modal-content"

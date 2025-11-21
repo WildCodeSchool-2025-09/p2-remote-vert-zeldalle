@@ -32,10 +32,10 @@
 	z-index: 10;
 }
 
-.page-buttons button:first-child {
+.page-buttons .left-arrow {
 	left: 4%;
 }
 
-.page-buttons button:last-child {
+.page-buttons .right-arrow {
 	right: 4%;
 }

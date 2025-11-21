@@ -28,11 +28,23 @@ export interface Ingredient {
 export interface ItemCardProps {
 	item: Ingredient | Recipe;
 	type: "ingredient" | "recipe";
-	count: number;
-	onIncrement: () => void;
+	onSelect: (data: {
+		item: Ingredient | Recipe;
+		type: "ingredient" | "recipe";
+	}) => void;
 }
 
 export interface ItemListProps {
 	items: (Ingredient | Recipe)[];
 	type: "ingredient" | "recipe";
+	onSelect?: (data: {
+		item: Ingredient | Recipe;
+		type: "ingredient" | "recipe";
+	}) => void;
+}
+
+export interface InventoryItemProps {
+	id: number;
+	name: string;
+	image: string;
 }
