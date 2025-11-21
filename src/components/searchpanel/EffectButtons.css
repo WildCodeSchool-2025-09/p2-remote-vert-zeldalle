@@ -1,0 +1,23 @@
+.Effect-bar {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 4px;
+	margin-top: 6px;
+	width: 100%;
+	max-width: 195px;
+	height: 30px;
+}
+
+.Effect-bar button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 2px solid rgba(0, 0, 0, 0.9);
+	border-radius: 10px;
+	background-color: rgba(0, 0, 0, 0.5);
+	width: 30px;
+	height: 30px;
+	padding: 0;
+	transition: transform 0.2s ease;
+}
