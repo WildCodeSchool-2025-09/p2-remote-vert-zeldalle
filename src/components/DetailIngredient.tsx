@@ -64,6 +64,16 @@ export default function DetailIngredient({
 							onKeyUp={() => setIsMapOpen(false)}
 							onClick={() => setIsMapOpen(false)}
 						>
+							<button
+							className="CloseMapButton"
+							type="button"
+							onKeyUp={() => setIsMapOpen(false)}
+							onClick={() => setIsMapOpen(false)}
+							
+							>
+								X
+
+							</button>
 							<div
 								className="modal-content"
 								aria-modal="true"
