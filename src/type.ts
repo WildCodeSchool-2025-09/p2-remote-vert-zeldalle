@@ -16,12 +16,12 @@ export interface Ingredient {
 	name: string;
 	description: string;
 	category: string;
-	effects: string;
+	effect: string;
 	hearts: number;
 	found_in: string;
 	coords: { x: number; y: number };
 	image: string;
-	effects_image: string;
+	effect_image: string;
 	hearts_image: string;
 }
 
@@ -39,10 +39,8 @@ export interface ItemListProps {
 	onSelect?: React.Dispatch<React.SetStateAction<SelectedItem | null>>;
 }
 
-export interface DetailItemProps {
-	item: Recipe | Ingredient;
-	type: "recipe" | "ingredient";
-	ingredients: Ingredient[];
+export interface RecipeDetailProps {
+	recipe: Recipe;
 }
 
 export type SelectedItem =
