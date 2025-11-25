@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import ItemList from "../components/items/ItemList";
+import ItemList from "../components/Items/ItemList";
 import type { Ingredient } from "../type";
 
 function Ingredients() {

@@ -3,7 +3,7 @@ import type { ItemListProps } from "../../type";
 import ItemCard from "./ItemCard";
 import "./ItemList.css";
 
-function ItemList({ items, type }: ItemListProps) {
+function ItemList({ items, type, onSelect }: ItemListProps) {
 	const [page, setPage] = useState(0);
 	const [totalItems, setTotalItems] = useState<{ [id: number]: number }>({});
 
@@ -32,6 +32,7 @@ function ItemList({ items, type }: ItemListProps) {
 						type={type}
 						count={totalItems[item.id] || 0}
 						onIncrement={() => incrementCount(item.id)}
+						onSelect={onSelect}
 					/>
 				))}
 			</div>
@@ -39,7 +40,7 @@ function ItemList({ items, type }: ItemListProps) {
 			<div className="page-buttons">
 				<button
 					type="button"
-					className="fleche-gauche"
+					className="left-arrow"
 					onClick={() => setPage(page - 1)}
 					disabled={page === 0}
 				>
@@ -47,7 +48,7 @@ function ItemList({ items, type }: ItemListProps) {
 				</button>
 				<button
 					type="button"
-					className="fleche-droite"
+					className="right-arrow"
 					onClick={() => setPage(page + 1)}
 					disabled={page + 1 >= totalPages}
 				>
