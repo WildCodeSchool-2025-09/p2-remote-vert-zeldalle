@@ -13,6 +13,7 @@ interface IngredientTestProps {
 	hearts: number;
 	filters: Record<FilterKey, boolean>;
 	type: Record<TypeKey, boolean>;
+	onDataLoaded?: (ingredients: Ingredient[]) => void;
 }
 
 type Ingredient = {
@@ -29,7 +30,12 @@ type Ingredient = {
 	hearts_image: string;
 };
 
-function IngredientTest({ hearts, filters, type }: IngredientTestProps) {
+function IngredientTest({
+	hearts,
+	filters,
+	type,
+	onDataLoaded,
+}: IngredientTestProps) {
 	const [ingredients, setIngredients] = useState<Ingredient[]>([]);
 
 	useEffect(() => {
@@ -37,9 +43,12 @@ function IngredientTest({ hearts, filters, type }: IngredientTestProps) {
 			"https://my-json-server.typicode.com/WildCodeSchool-2025-09/JS-remote-vert-p2-api-ingredients-zelda-cookbook/ingredients",
 		)
 			.then((response) => response.json())
-			.then((data) => setIngredients(data))
+			.then((data) => {
+				setIngredients(data);
+				onDataLoaded?.(data);
+			})
 			.catch((error) => console.error("Erreur:", error));
-	}, []);
+	}, [onDataLoaded]);
 
 	const effectMap: Record<FilterKey, string[]> = {
 		cold: ["Résistance au froid"],

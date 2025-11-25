@@ -1,37 +1,36 @@
 import { useState } from "react";
+import Filters from "./components/Filters";
 import IngredientTest from "./components/IngredientTest";
-import Panel from "./components/searchpanel/Panel";
 import "./reset.css";
-
-type FilterKey = "cold" | "stamina" | "heat" | "mighty" | "sneaky" | "climbing";
-type TypeKey =
-	| "meats"
-	| "fruitsvegetables"
-	| "minerals"
-	| "insects"
-	| "fishs"
-	| "monsters";
+import type { Element, FilterKey, TypeKey } from "./components/Filters";
 
 function App() {
-	const [selectedHearts, setSelectedHearts] = useState(0);
+	const [Hearts, setHearts] = useState(0);
 
-	const [filters, setFilters] = useState<Record<FilterKey, boolean>>(
+	const [filters, setEffects] = useState<Record<FilterKey, boolean>>(
 		{} as Record<FilterKey, boolean>,
 	);
 
 	const [types, setTypes] = useState<Record<TypeKey, boolean>>(
 		{} as Record<TypeKey, boolean>,
 	);
+	const [elements, setElements] = useState<Element[]>([]);
 
 	return (
 		<div className="App">
-			<Panel
-				onHeartsChange={setSelectedHearts}
-				onFiltersChange={setFilters}
-				onTypesChange={setTypes}
+			<Filters
+				HeartsChange={setHearts}
+				EffectsChange={setEffects}
+				TypesChange={setTypes}
+				elements={elements}
 			/>
 
-			<IngredientTest filters={filters} hearts={selectedHearts} type={types} />
+			<IngredientTest
+				filters={filters}
+				hearts={Hearts}
+				type={types}
+				onDataLoaded={setElements}
+			/>
 		</div>
 	);
 }
