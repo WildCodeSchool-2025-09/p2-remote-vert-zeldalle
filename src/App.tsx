@@ -2,7 +2,7 @@ import { useState } from "react";
 import Filters from "./components/Filters";
 import IngredientTest from "./components/IngredientTest";
 import "./reset.css";
-import type { Element, FilterKey, TypeKey } from "./components/Filters";
+import type { FilterKey, TypeKey } from "./components/Filters";
 
 function App() {
 	const [Hearts, setHearts] = useState(0);
@@ -14,7 +14,7 @@ function App() {
 	const [types, setTypes] = useState<Record<TypeKey, boolean>>(
 		{} as Record<TypeKey, boolean>,
 	);
-	const [elements, setElements] = useState<Element[]>([]);
+	
 
 	return (
 		<div className="App">
@@ -22,14 +22,14 @@ function App() {
 				HeartsChange={setHearts}
 				EffectsChange={setEffects}
 				TypesChange={setTypes}
-				elements={elements}
+				
 			/>
 
 			<IngredientTest
 				filters={filters}
 				hearts={Hearts}
 				type={types}
-				onDataLoaded={setElements}
+				
 			/>
 		</div>
 	);
