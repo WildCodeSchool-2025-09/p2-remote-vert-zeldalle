@@ -16,8 +16,8 @@ export default function Ingredients() {
 
 	useEffect(() => {
 		fetch(INGREDIENTS_API)
-			.then((res) => res.json() as Promise<Ingredient[]>)
-			.then((data) => setIngredients(data))
+			.then((res) => res.json())
+			.then((data: Ingredient[]) => setIngredients(data))
 			.catch(() => console.error("Erreur lors du chargement"));
 	}, []);
 

@@ -39,10 +39,8 @@ export interface ItemListProps {
 	onSelect?: React.Dispatch<React.SetStateAction<SelectedItem | null>>;
 }
 
-export interface DetailItemProps {
-	item: Recipe | Ingredient;
-	type: "recipe" | "ingredient";
-	ingredients: Ingredient[];
+export interface RecipeDetailProps {
+	recipe: Recipe;
 }
 
 export type SelectedItem =
