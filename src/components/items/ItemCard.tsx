@@ -6,9 +6,7 @@ function ItemCard({ item, type, onSelect }: ItemCardProps) {
 		const ingredient = item as Ingredient;
 
 		return (
-			<button
-				type="button"
-				className="item-card"
+			<button type="button"  className="item-card"
 				onClick={() => onSelect({ item: ingredient, type: "ingredient" })}
 			>
 				<img

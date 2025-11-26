@@ -1,22 +1,16 @@
-import ItemCard from "../components/items/ItemCard";
 import { useInventory } from "../contexts/InventoryContext";
 
-const { inventory } = useInventory();
+export default function Inventory() {
+	const { inventory } = useInventory();
 
-function Inventory() {
 	return (
 		<div className="inventory-list">
 			{inventory.map((item) => (
-				<ItemCard
-					key={item.id}
-					item={item}
-					type="ingredient"
-					count={1}
-					addOne={() => {}}
-				/>
+				<div key={item.id} className="inventory-item">
+					<img src={`/images/ingredients/${item.image}`} alt={item.name} />
+					<p>{item.quantity}</p>
+				</div>
 			))}
 		</div>
 	);
 }
-
-export default Inventory;

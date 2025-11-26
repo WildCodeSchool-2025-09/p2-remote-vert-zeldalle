@@ -39,7 +39,7 @@ function ItemList({ items, type }: ItemListProps) {
 			<div className="page-buttons">
 				<button
 					type="button"
-					className="left-arrow"
+					className="fleche-gauche"
 					onClick={() => setPage(page - 1)}
 					disabled={page === 0}
 				>
@@ -47,7 +47,7 @@ function ItemList({ items, type }: ItemListProps) {
 				</button>
 				<button
 					type="button"
-					className="right-arrow"
+					className="fleche-droite"
 					onClick={() => setPage(page + 1)}
 					disabled={page + 1 >= totalPages}
 				>

@@ -11,7 +11,9 @@ const InventoryContext = createContext<InventoryContextType>({
 	addIngredient: () => {},
 });
 
-export default function InventoryProvider({ children }: { children: ReactNode }) {
+export default function InventoryProvider({
+	children,
+}: { children: ReactNode }) {
 	const [inventory, setInventory] = useState<InventoryItemProps[]>([]);
 
 	const addIngredient = (item: InventoryItemProps) => {

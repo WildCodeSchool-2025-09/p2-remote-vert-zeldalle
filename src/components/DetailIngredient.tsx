@@ -1,82 +1,48 @@
-import { useState } from "react";
-import "./Items/ItemList.css";
-import { useInventory } from "../contexts/InventoryContext";
+import { useState, useEffect } from "react";
 import type { Ingredient } from "../type";
+import { useInventory } from "../contexts/InventoryContext";
 import "./DetailIngredient.css";
 
 interface DetailIngredientProps {
 	ingredient: Ingredient;
 }
-const { addIngredient } = useInventory();
 
 export default function DetailIngredient({
 	ingredient,
 }: DetailIngredientProps) {
 	const [count, setCount] = useState(0);
+	const { addIngredient, inventory } = useInventory();
 
-	if (!ingredient) {
-		return <p>Aucun ingrédient sélectionné</p>;
-	}
+	useEffect(() => {
+		const existing = inventory.find((i) => i.id === ingredient.id);
+		setCount(existing ? existing.quantity : 0);
+	}, [ingredient, inventory]);
 
 	return (
 		<div className="ingredient-detail">
-			<div className="ImageIngredient">
-				<img
-					className="ImageIngredientsetting"
-					src={`/ingredientsImg/${ingredient.image}`}
-					alt={ingredient.name}
-				/>
-			</div>
+			<img src={`/ingredientsImg/${ingredient.image}`} alt={ingredient.name} />
+			<h4>{ingredient.name}</h4>
+			<p>{ingredient.description}</p>
 
-			<div className="InfoIngredient">
-				<div className="NomIngredient">
-					<h4>{ingredient.name}</h4>
-					{ingredient.description}
-				</div>
-
-				<div className="ImageEffectsetting">
-					{ingredient.effect_image && (
-						<img
-							className="ImageEffect"
-							src={`/Iconesimg/${ingredient.effect_image}`}
-							alt={ingredient.effect}
-						/>
-					)}
-
-					{ingredient.hearts_image && (
-						<img
-							className="ImageEffect"
-							src={`/Iconesimg/${ingredient.hearts_image}`}
-							alt={ingredient.hearts_image}
-						/>
-					)}
-				</div>
-
-				<div className="RightDetails">
-					<button type="button" className="MapButton">
-						<img src="/images/MapButton.png" alt="" />
-					</button>
-
-					<div className="CounterButtons">
-						<button
-							type="button"
-							className="BtnMinus"
-							onClick={() => {
-								if (count > 0) setCount(count - 1);
-							}}
-						>
-							–
-						</button>
-						<p className="CountNumber">{count}</p>
-						<button
-							type="button"
-							className="BtnPlus"
-							onClick={() => setCount(count + 1)}
-						>
-							+
-						</button>
-					</div>
-				</div>
+			<div className="counter">
+				<button type="button" onClick={() => {
+						if (count > 0) {
+							setCount(count - 1);
+							addIngredient({ ...ingredient, quantity: count - 1 });
+						}
+					}}
+				>
+					–
+				</button>
+				<span>{count}</span>
+				<button type="button"
+					onClick={() => {
+						setCount(count + 1);
+						addIngredient({ ...ingredient, quantity: count + 1 });
+					}}
+				>
+					+
+				</button>
 			</div>
 		</div>
 	);
