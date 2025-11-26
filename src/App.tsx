@@ -3,6 +3,8 @@ import Filters from "./components/Filters";
 import IngredientTest from "./components/IngredientTest";
 import "./reset.css";
 import type { FilterKey, TypeKey } from "./components/Filters";
+import { Outlet } from "react-router";
+import "./App.css";
 
 function App() {
 	const [Hearts, setHearts] = useState(0);
@@ -16,7 +18,8 @@ function App() {
 	);
 
 	return (
-		<div className="App">
+		<>
+		<header className="App">
 			<Filters
 				HeartsChange={setHearts}
 				EffectsChange={setEffects}
@@ -24,7 +27,11 @@ function App() {
 			/>
 
 			<IngredientTest filters={filters} hearts={Hearts} type={types} />
-		</div>
+		</header>
+		<main>
+			<Outlet />
+		</main>
+		</>	
 	);
 }
 
