@@ -5,19 +5,17 @@ interface MapDisplayProps {
 	ingredient: Ingredient;
 }
 
-const ZOOM_WIDTH = 400;
-const ZOOM_HEIGHT = 500;
+const ZOOM_WIDTH = 530;
+const ZOOM_HEIGHT = 571;
 const MAP_WIDTH = 3200;
 const MAP_HEIGHT = 2400;
 
 export default function MapDisplay({ ingredient }: MapDisplayProps) {
-	// Utilise x_pixel / y_pixel si elles existent, sinon calcule depuis coords
 	const x =
 		ingredient.x_pixel ?? ((ingredient.coords?.x ?? 0) / 100) * MAP_WIDTH;
 	const y =
 		ingredient.y_pixel ?? ((ingredient.coords?.y ?? 0) / 100) * MAP_HEIGHT;
 
-	// Empêche de sortir des bords
 	const xOffset = Math.min(
 		Math.max(x - ZOOM_WIDTH / 2, 0),
 		MAP_WIDTH - ZOOM_WIDTH,
