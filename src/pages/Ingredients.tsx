@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import DetailIngredient from "../components/DetailIngredient";
 import IngredientMap from "../components/IngredientMap";
-import ItemList from "../components/Items/ItemList";
+import ItemList from "../components/items/ItemList";
 import { INGREDIENTS_API } from "../constants";
 import { useInventory } from "../contexts/InventoryContext";
 import type { Ingredient } from "../type";

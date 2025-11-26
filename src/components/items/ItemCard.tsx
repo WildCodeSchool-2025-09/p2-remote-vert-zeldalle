@@ -9,9 +9,9 @@ export default function ItemCard({ item, type, onSelect }: ItemCardProps) {
 
 	const handleClick = () => {
 		if (type === "ingredient") {
-			onSelect(item as Ingredient); // simple item pour les ingrédients
+			onSelect (item as Ingredient);
 		} else {
-			onSelect({ item, type }); // objet avec type pour les recettes
+			onSelect ({ item, type }); 
 		}
 	};
 

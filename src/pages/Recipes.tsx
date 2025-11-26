@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import ItemList from "../components/Items/ItemList";
+import ItemList from "../components/items/ItemList";
 import RecipeDetail from "../components/RecipeDetail";
 import { RECIPES_API } from "../constants";
 import type { Recipe, SelectedItem } from "../type";

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { INGREDIENTS_API } from "../constants";
 import type { Ingredient, RecipeDetailProps } from "../type";
-import ItemCard from "./Items/ItemCard";
+import ItemCard from "./items/ItemCard";
 import "./RecipeDetail.css";
 
 function RecipeDetail({ recipe }: RecipeDetailProps) {
