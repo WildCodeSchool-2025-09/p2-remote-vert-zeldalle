@@ -7,7 +7,7 @@
 	border-radius: 10px;
 	background-color: var(--color-overlay);
 	aspect-ratio: 1 / 1;
-	gap: 3%;
+	gap: 10px;
 }
 
 .item-card img {
