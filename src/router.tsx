@@ -1,10 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "./App";
+import InventoryProvider from "./contexts/InventoryContext";
 import Home from "./pages/Home";
 import Ingredients from "./pages/Ingredients";
-import Recipes from "./pages/Recipes";
 import Inventory from "./pages/Inventory";
-import  InventoryProvider from "./contexts/InventoryContext";
+import Recipes from "./pages/Recipes";
 
 const router = createBrowserRouter([
 	{
@@ -14,10 +14,18 @@ const router = createBrowserRouter([
 			</InventoryProvider>
 		),
 		children: [
-			{ path: "/", element: <Home /> },
-			{ path: "/ingredients", element: <Ingredients /> },
-			{ path: "/inventaire", element: <Inventory /> },
-			{ path: "/recettes", element: <Recipes /> },
+			{
+				path: "/inventory",
+				element: <Inventory />,
+			},
+			{
+				path: "/ingredients",
+				element: <Ingredients />,
+			},
+			{
+				path: "/recettes",
+				element: <Recipes />,
+			},
 		],
 	},
 ]);

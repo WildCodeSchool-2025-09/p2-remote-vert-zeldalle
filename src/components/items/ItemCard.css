@@ -6,9 +6,8 @@
 	border: solid 1px white;
 	border-radius: 10px;
 	background-color: var(--color-overlay);
-	min-width: 35%;
-	min-height: 70%;
-	gap: 3%;
+	aspect-ratio: 1 / 1;
+	gap: 10px;
 }
 
 .item-card img {

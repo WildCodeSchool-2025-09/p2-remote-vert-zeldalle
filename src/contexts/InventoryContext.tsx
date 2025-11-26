@@ -6,20 +6,20 @@ type InventoryContextType = {
 	addIngredient: (item: InventoryItemProps) => void;
 };
 
-const InventoryContext = createContext<InventoryContextType>({
-	inventory: [],
-	addIngredient: () => {},
-});
+const InventoryContext = createContext<InventoryContextType | undefined>(
+	undefined,
+);
 
 export default function InventoryProvider({
 	children,
-}: { children: ReactNode }) {
+}: {
+	children: ReactNode;
+}) {
 	const [inventory, setInventory] = useState<InventoryItemProps[]>([]);
 
 	const addIngredient = (item: InventoryItemProps) => {
 		setInventory((prev) => {
-			if (prev.find((InventoryItemProps) => InventoryItemProps.id === item.id))
-				return prev;
+			if (prev.find((i) => i.id === item.id)) return prev;
 			return [...prev, item];
 		});
 	};
@@ -32,5 +32,11 @@ export default function InventoryProvider({
 }
 
 export const useInventory = () => {
-	return useContext(InventoryContext);
+	const context = useContext(InventoryContext);
+
+	if (!context) {
+		throw new Error("useInventory must be used inside <InventoryProvider>");
+	}
+
+	return context;
 };

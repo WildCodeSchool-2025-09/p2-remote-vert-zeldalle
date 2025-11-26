@@ -1,36 +1,32 @@
 import type { Ingredient, ItemCardProps, Recipe } from "../../type";
 import "./ItemCard.css";
 
-function ItemCard({ item, type, onSelect }: ItemCardProps) {
-	if (type === "ingredient") {
-		const ingredient = item as Ingredient;
+export default function ItemCard({ item, type, onSelect }: ItemCardProps) {
+	const imagePath =
+		type === "ingredient"
+			? `/images/ingredients/${(item as Ingredient).image}`
+			: `/images/recipes/${(item as Recipe).image}`;
 
-		return (
-			<button type="button"  className="item-card"
-				onClick={() => onSelect({ item: ingredient, type: "ingredient" })}
-			>
-				<img
-					src={`/images/ingredients/${ingredient.image}`}
-					alt={ingredient.name}
-				/>
-			</button>
-		);
-	}
+	const handleClick = () => {
+		if (type === "ingredient") {
+			onSelect(item as Ingredient); // simple item pour les ingrédients
+		} else {
+			onSelect({ item, type }); // objet avec type pour les recettes
+		}
+	};
 
-	if (type === "recipe") {
-		const recipe = item as Recipe;
-
-		return (
-			<button
-				type="button"
-				className="item-card"
-				onClick={() => onSelect({ item: recipe, type: "recipe" })}
-			>
-				<img src={`/images/recipes/${recipe.image}`} alt={recipe.name} />
-			</button>
-		);
-	}
-	return null;
+	return (
+		<button
+			type="button"
+			className="item-card"
+			onClick={handleClick}
+			style={{ cursor: "pointer" }}
+		>
+			<img
+				src={imagePath}
+				alt={item.name}
+				onError={() => console.warn("Image introuvable :", imagePath)}
+			/>
+		</button>
+	);
 }
-
-export default ItemCard;
