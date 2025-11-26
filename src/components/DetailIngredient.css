@@ -7,7 +7,6 @@
 	margin-left: 2.2em;
 	margin-right: 2.2em;
 
-
 	background-color: rgb(255, 255, 255);
 	border-radius: 10px;
 	box-shadow: inset 0px 0px 5px 2px rgba(0, 0, 0, 0.5);
@@ -38,7 +37,6 @@
 	position: relative;
 	isolation: isolate;
 	z-index: 10;
-
 }
 
 .ImageEffectsetting ::after {
@@ -171,7 +169,8 @@ h4 {
 	border: none;
 	margin: 10px;
 	border: #4442425d solid 2px;
-	border-radius: 10px;	}
+	border-radius: 10px;
+}
 .modal-overlay {
 	position: fixed;
 	inset: 0;

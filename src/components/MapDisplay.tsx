@@ -26,7 +26,6 @@ export default function MapDisplay({ ingredient }: MapDisplayProps) {
 	);
 
 	return (
-		
 		<div className="Mapcard">
 			<div
 				className="Mapcard"

@@ -6,27 +6,25 @@ import "./Inventory.css";
 
 function Inventory() {
 	const { inventory, addIngredient, removeIngredient } = useInventory();
-	const [selectedItem, setSelectedItem] = useState(inventory[0])
+	const [selectedItem, setSelectedItem] = useState(inventory[0]);
 
-	const handleSelect = (item ) => {
+	const handleSelect = (item) => {
 		setSelectedItem(item);
-
-
 	};
 
 	return (
 		<div className="inventory-list">
 			<div className="inventory-grid">
-			{inventory.map((item) => (
-				<ItemCard
-					key={item.id}
-					item={item}
-					type="ingredient"
-					onSelect={() => handleSelect(item)}
-				/>
-			))}
+				{inventory.map((item) => (
+					<ItemCard
+						key={item.id}
+						item={item}
+						type="ingredient"
+						onSelect={() => handleSelect(item)}
+					/>
+				))}
 			</div>
-			<DetailIngredient ingredient ={selectedItem}/>
+			<DetailIngredient ingredient={selectedItem} />
 		</div>
 	);
 }
