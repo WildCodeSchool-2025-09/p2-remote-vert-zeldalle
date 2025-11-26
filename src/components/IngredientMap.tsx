@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import  type { IngredientType } from "../type";
+import type { IngredientType } from "../type";
 
 interface MapProps {
 	onSelect: (ingredient: IngredientType) => void;
