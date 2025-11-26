@@ -14,7 +14,6 @@ function App() {
 	const [types, setTypes] = useState<Record<TypeKey, boolean>>(
 		{} as Record<TypeKey, boolean>,
 	);
-	
 
 	return (
 		<div className="App">
@@ -22,15 +21,9 @@ function App() {
 				HeartsChange={setHearts}
 				EffectsChange={setEffects}
 				TypesChange={setTypes}
-				
 			/>
 
-			<IngredientTest
-				filters={filters}
-				hearts={Hearts}
-				type={types}
-				
-			/>
+			<IngredientTest filters={filters} hearts={Hearts} type={types} />
 		</div>
 	);
 }
