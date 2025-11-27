@@ -7,14 +7,14 @@ import "./NavigationBar.css";
 function NavigateBar() {
 	const location = useLocation();
 
-	const recipesActive = location.pathname === "/recettes";
-	const inventoryActive = location.pathname === "/inventory";
-	const ingredientActive = location.pathname === "/ingredients";
+	const recipesActive = location.pathname === "/app/recettes";
+	const inventoryActive = location.pathname === "/app/inventory";
+	const ingredientActive = location.pathname === "/app/ingredients";
 
 	return (
 		<div className="navContainer">
 			<Link
-				to="/recettes"
+				to="/app/recettes"
 				className={`nav-card ${recipesActive ? "active" : ""}`}
 			>
 				<img src={recipesIcon} alt="logo recettes" />
@@ -22,7 +22,7 @@ function NavigateBar() {
 			</Link>
 
 			<Link
-				to="/inventory"
+				to="/app/inventory"
 				className={`nav-card ${inventoryActive ? "active" : ""}`}
 			>
 				<img src={inventoryIcon} alt="logo inventory" />
@@ -30,7 +30,7 @@ function NavigateBar() {
 			</Link>
 
 			<Link
-				to="/ingredients"
+				to="/app/ingredients"
 				className={`nav-card ${ingredientActive ? "active" : ""}`}
 			>
 				<img src={ingredientsIcon} alt="logo Ingrédients" />

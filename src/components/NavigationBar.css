@@ -1,10 +1,9 @@
-/* --- NAV CONTAINER EN BAS --- */
 .navContainer {
 	position: fixed;
 	bottom: 0;
 	left: 0;
-	width: 100vw;      /* ★ Ajout */
-	transform: none;   /* ★ Ajout */
+	width: 100vw;
+	transform: none;
 
 	display: flex;
 	justify-content: center;
@@ -16,7 +15,6 @@
 	pointer-events: none;
 }
 
-/* --- CARD NAVIGATION --- */
 .nav-card {
 	pointer-events: all;
 
@@ -27,9 +25,9 @@
 
 	gap: 4px;
 
-	flex: 1;            /* ★ Ajout */
-	width: auto;        /* ★ Ajout */
-	max-width: none;    /* ★ Ajout */
+	flex: 1;
+	width: auto;
+	max-width: none;
 
 	min-width: 70px;
 	height: 42px;
@@ -53,24 +51,19 @@
 	transition: height 0.25s ease;
 }
 
-/* --- ICÔNES --- */
 .nav-card img {
 	width: 20px;
 	height: 20px;
 	object-fit: contain;
 }
 
-/* --- Texte --- */
 .nav-card span {
 	font-size: 0.8rem;
 	white-space: nowrap;
 }
 
-/* --- Card active pop-up --- */
 .nav-card.active {
 	height: 52px;
 	border-color: rgba(255, 215, 130, 0.9);
 	color: #ffe7b0;
 }
-
-/* --- RESPONSIVE à crée --- */

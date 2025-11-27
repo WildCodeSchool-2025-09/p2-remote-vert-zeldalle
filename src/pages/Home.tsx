@@ -22,7 +22,7 @@ export default function Home() {
 
 					<CookingPot3DOk />
 
-					<Link to="/inventory" className="home-button-enter">
+					<Link to="/app/inventory" className="home-button-enter">
 						<img src={homeButton} alt="Enter" />
 					</Link>
 				</div>
