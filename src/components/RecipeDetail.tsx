@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { INGREDIENTS_API } from "../constants";
 import type { Ingredient, RecipeDetailProps } from "../type";
-import ItemCard from "./Items/ItemCard";
+import ItemCard from "./items/ItemCard";
 import "./RecipeDetail.css";
+import { Link } from "react-router";
 
-function RecipeDetail({ recipe }: RecipeDetailProps) {
+function RecipeDetail({ recipe, onIngredientSelect }: RecipeDetailProps) {
 	const [ingredients, setIngredients] = useState<Ingredient[]>([]);
 	const recipeIngredients = ingredients.filter((ingredient) =>
 		recipe.ingredient_ids.includes(ingredient.id),
@@ -42,6 +43,11 @@ function RecipeDetail({ recipe }: RecipeDetailProps) {
 					/>
 				</div>
 
+				<div className="effect-duration">
+					<img src="/images/effects/timerIcon.png" alt="Durée de l'effet" />
+					<span className="text-duration">{recipe.duration}</span>
+				</div>
+
 				<div className="heart-wrapper">
 					<img
 						src={`/images/effects/${recipe.heart_image}`}
@@ -50,19 +56,20 @@ function RecipeDetail({ recipe }: RecipeDetailProps) {
 					<span className="heart-count">{recipe.hearts}</span>
 				</div>
 
-				<div className="effect-duration">
-					<img src="/images/effects/timerIcon.png" alt="Durée de l'effet" />
-					<span className="text-duration">{recipe.duration}</span>
-				</div>
-
 				<article className="ingredient-img">
 					{recipeIngredients.map((ingredient) => (
-						<img
+						<button
+							type="button"
 							key={ingredient.id}
-							src={`/images/ingredients/${ingredient.image}`}
-							alt={ingredient.name}
-							className="ingredient-icon"
-						/>
+							className="ingredient-icon-btn"
+							onClick={() => onIngredientSelect(ingredient)}
+						>
+							<img
+								src={`/images/ingredients/${ingredient.image}`}
+								alt={ingredient.name}
+								className="ingredient-icon"
+							/>
+						</button>
 					))}
 				</article>
 			</div>

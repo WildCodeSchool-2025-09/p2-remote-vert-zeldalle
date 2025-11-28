@@ -9,7 +9,7 @@
 	background-color: rgb(255, 255, 255);
 	box-shadow: inset 0px 0px 5px 2px rgba(0, 0, 0, 0.5);
 	gap: 5px;
-	margin: 1.8em auto 0;
+	margin: 1em auto 0;
 	justify-items: center;
 	border-radius: 10px;
 }
@@ -78,11 +78,19 @@
 
 .ingredient-img img {
 	background-color: #523f0086;
+	box-shadow: inset 0px 0px 9px 0px rgba(0, 0, 0, 0.5);
+}
+
+.ingredient-icon-btn {
+	background: none;
+	border: none;
+	padding: 0;
+	cursor: pointer;
 }
 
 .ingredient-img img:nth-child(1) {
-	grid-row: 1;
-	grid-column: 3;
+	grid-row: 2;
+	grid-column: 2;
 }
 
 .ingredient-img img:nth-child(2) {
@@ -112,6 +120,12 @@
 	width: 8vw;
 }
 
+.image-effect img,
+.heart-wrapper img {
+	margin: 3px auto;
+	display: block;
+}
+
 .ingredient-icon,
 .effect-duration,
 .image-effect,
@@ -132,8 +146,8 @@
 .heart-wrapper {
 	position: relative;
 	display: inline-block;
-	grid-row: 1;
-	grid-column: 2;
+	grid-row: 2;
+	grid-column: 1;
 }
 
 .heart-count {
@@ -144,14 +158,14 @@
 	font-weight: bold;
 	color: white;
 	text-shadow: 0 0 2px black;
-	font-size: clamp(1rem, 3.1vw, 1.4rem);
+	font-size: clamp(1rem, 3.1vw, 2rem);
 }
 
 .effect-duration {
 	display: flex;
 	align-items: center;
-	grid-row: 2;
-	grid-column: 1 / span 2;
+	grid-row: 1;
+	grid-column: 2 / span 2;
 }
 
 .text-duration {
