@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import type { Ingredient, Recipe } from "../../type";
 import ItemCard from "./ItemCard";
 import "./ItemList.css";
+import { useInventory } from "../../contexts/InventoryContext";
 
 interface ItemListProps {
 	type: "ingredient" | "recipe";
@@ -24,6 +25,7 @@ export default function ItemList({ type, onSelect }: ItemListProps) {
 			.then((data) => setItems(data))
 			.catch(() => console.error("❌ Erreur chargement items"));
 	}, [type]);
+	const { inventory } = useInventory();
 
 	const currentItems = items.slice(
 		page * itemsPerPage,
@@ -34,15 +36,20 @@ export default function ItemList({ type, onSelect }: ItemListProps) {
 	return (
 		<section className="item-list-wrapper">
 			<div className="item-list">
-				{currentItems.map((item) => (
-					<ItemCard key={item.id} item={item} type={type} onSelect={onSelect} />
-				))}
+				{currentItems.map((item) => {
+					const quantity = inventory.filter(
+						(invItem) => invItem.id === item.id,
+					).length;
+					return (
+					<ItemCard key={item.id} item={item} type={type} quantity={quantity} onSelect={onSelect} />
+					);
+})}
 			</div>
 
 			<div className="page-buttons">
 				<button
 					type="button"
-					className="fleche-gauche"
+					className="left-arrow"
 					onClick={() => setPage(page - 1)}
 					disabled={page === 0}
 				>
@@ -50,7 +57,7 @@ export default function ItemList({ type, onSelect }: ItemListProps) {
 				</button>
 				<button
 					type="button"
-					className="fleche-droite"
+					className="right-arrow"
 					onClick={() => setPage(page + 1)}
 					disabled={page + 1 >= totalPages}
 				>

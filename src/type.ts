@@ -12,18 +12,19 @@ export interface Recipe {
 }
 
 export interface Ingredient {
-	id: number;
-	name: string;
-	description: string;
-	category: string;
-	effect: string;
-	hearts: number;
-	found_in: string;
-	coords: { x: number; y: number };
-	image: string;
-	effect_image: string;
-	hearts_image: string;
-}
+		id: number;
+		name: string;
+		description: string;
+		category: string;
+		effect: string;
+		hearts: number;
+		found_in: string;
+		coords: { x: number; y: number };
+		image: string;
+		effect_image: string;
+		hearts_image: string;
+		count: number;
+	}
 
 export interface ItemCardProps {
 	item: Ingredient | Recipe;

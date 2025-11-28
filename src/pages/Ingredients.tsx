@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import DetailIngredient from "../components/DetailIngredient";
-import IngredientMap from "../components/IngredientMap";
 import ItemList from "../components/items/ItemList";
 import { INGREDIENTS_API } from "../constants";
 import { useInventory } from "../contexts/InventoryContext";
@@ -23,18 +22,11 @@ export default function Ingredients() {
 
 	const handleSelect = (ingredient: Ingredient) => {
 		setSelectedIngredient(ingredient);
-		addIngredient(ingredient);
 	};
 
 	return (
 		<div>
 			<ItemList items={ingredients} type="ingredient" onSelect={handleSelect} />
-
-			<IngredientMap
-				onSelect={(ingredient) => {
-					setSelectedIngredient(ingredient);
-				}}
-			/>
 
 			{selectedIngredient && (
 				<DetailIngredient ingredient={selectedIngredient} />
