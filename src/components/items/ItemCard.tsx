@@ -7,6 +7,7 @@ export default function ItemCard({
 	onSelect,
 	quantity,
 }: ItemCardProps) {
+
 	const imagePath =
 		type === "ingredient"
 			? `/images/ingredients/${(item as Ingredient).image}`
@@ -32,7 +33,8 @@ export default function ItemCard({
 				alt={item.name}
 				onError={() => console.warn("Image introuvable :", imagePath)}
 			/>
-			<p className="quantity">{quantity} </p>
+			{quantity > 0 &&
+			<p className="quantity">{quantity} </p>}
 		</button>
 	);
 }

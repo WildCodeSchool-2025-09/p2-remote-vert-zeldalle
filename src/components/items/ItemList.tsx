@@ -12,7 +12,7 @@ interface ItemListProps {
 export default function ItemList({ type, onSelect }: ItemListProps) {
 	const [items, setItems] = useState<(Ingredient | Recipe)[]>([]);
 	const [page, setPage] = useState(0);
-	const itemsPerPage = 16;
+	const itemsPerPage = 12;
 
 	useEffect(() => {
 		const API =
