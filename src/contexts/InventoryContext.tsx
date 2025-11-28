@@ -17,20 +17,20 @@ export default function InventoryProvider({
 	children: ReactNode;
 }) {
 	const [inventory, setInventory] = useState<InventoryItemProps[]>([]);
-const removeIngredient = (id: number) => {
-	setInventory((prev) => {
-		const index = prev.findIndex(item => item.id === id);
-		if (index === -1) return prev;
+	const removeIngredient = (id: number) => {
+		setInventory((prev) => {
+			const index = prev.findIndex((item) => item.id === id);
+			if (index === -1) return prev;
 
-        const updated = [...prev];
-        updated.splice(index, 1);
+			const updated = [...prev];
+			updated.splice(index, 1);
 
-        return updated;
-	});
-};
-const addIngredient = (item: InventoryItemProps) => {
-	setInventory((prev) => [...prev, item]);
-};
+			return updated;
+		});
+	};
+	const addIngredient = (item: InventoryItemProps) => {
+		setInventory((prev) => [...prev, item]);
+	};
 	return (
 		<InventoryContext.Provider
 			value={{ inventory, addIngredient, removeIngredient }}

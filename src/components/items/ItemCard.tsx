@@ -1,7 +1,12 @@
 import type { Ingredient, ItemCardProps, Recipe } from "../../type";
 import "./ItemCard.css";
 
-export default function ItemCard({ item, type, onSelect, quantity }: ItemCardProps) {
+export default function ItemCard({
+	item,
+	type,
+	onSelect,
+	quantity,
+}: ItemCardProps) {
 	const imagePath =
 		type === "ingredient"
 			? `/images/ingredients/${(item as Ingredient).image}`
@@ -9,9 +14,9 @@ export default function ItemCard({ item, type, onSelect, quantity }: ItemCardPro
 
 	const handleClick = () => {
 		if (type === "ingredient") {
-			onSelect(item as Ingredient); 
+			onSelect(item as Ingredient);
 		} else {
-			onSelect({ item, type }); 
+			onSelect({ item, type });
 		}
 	};
 

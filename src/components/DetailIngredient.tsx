@@ -44,70 +44,68 @@ export default function DetailIngredient({
 	return (
 		<div className="ingredient-detail">
 			<div className="Left-detail">
-			<div className="ImageIngredient">
-				<img
-					className="ImageIngredientsetting"
-					src={`/images/ingredients/${ingredient.image}`}
-					alt={ingredient.name}
-				/>
+				<div className="ImageIngredient">
+					<img
+						className="ImageIngredientsetting"
+						src={`/images/ingredients/${ingredient.image}`}
+						alt={ingredient.name}
+					/>
+				</div>
+				<div className="ImageEffectsetting">
+					{ingredient.effect_image && (
+						<img
+							className="ImageEffect"
+							src={`/Iconesimg/${ingredient.effect_image}`}
+							alt={ingredient.effect}
+						/>
+					)}
+					{ingredient.hearts_image && (
+						<img
+							className="ImageEffect"
+							src={`/Iconesimg/${ingredient.hearts_image}`}
+							alt={ingredient.hearts_image}
+						/>
+					)}
+				</div>
 			</div>
-								<div className="ImageEffectsetting">
-						{ingredient.effect_image && (
-							<img
-								className="ImageEffect"
-								src={`/Iconesimg/${ingredient.effect_image}`}
-								alt={ingredient.effect}
-							/>
-						)}
-						{ingredient.hearts_image && (
-							<img
-								className="ImageEffect"
-								src={`/Iconesimg/${ingredient.hearts_image}`}
-								alt={ingredient.hearts_image}
-							/>
-						)}
-					</div>
-</div>
 			<div className="InfoIngredient">
 				<div className="NomIngredient">
 					<h3>{ingredient.name}</h3>
 					<p>{ingredient.description}</p>
 				</div>
 
-
-
 				<div className="RightDetails">
-				<button
-					type="button"
-					className="MapButton"
-					onClick={() => setIsMapOpen(true)}
-				>
-					<img src="/images/MapButton.png" alt="" width={70} />
-				</button>
-
-				{isMapOpen && (
-					<div
-						className="modal-overlay"
-						onKeyUp={() => setIsMapOpen(false)}
-						onClick={() => setIsMapOpen(false)}
+					<button
+						type="button"
+						className="MapButton"
+						onClick={() => setIsMapOpen(true)}
 					>
-						<button
-							className="CloseMapButton"
-							type="button"
+						<img src="/images/MapButton.png" alt="" width={70} />
+					</button>
+
+					{isMapOpen && (
+						<div
+							className="modal-overlay"
+							onKeyUp={() => setIsMapOpen(false)}
 							onClick={() => setIsMapOpen(false)}
 						>
-							X
-						</button>
-						<div
-							className="modal-content"
-							aria-modal="true"
-							onKeyUp={(e) => e.stopPropagation()}
-							onClick={(e) => e.stopPropagation()}
-						>
-							<MapDisplay ingredient={ingredient} />
+							<button
+								className="CloseMapButton"
+								type="button"
+								onClick={() => setIsMapOpen(false)}
+							>
+								X
+							</button>
+							<div
+								className="modal-content"
+								aria-modal="true"
+								onKeyUp={(e) => e.stopPropagation()}
+								onClick={(e) => e.stopPropagation()}
+							>
+								<MapDisplay ingredient={ingredient} />
+							</div>
 						</div>
-					</div>
-				)}
+					)}
 					<div className="CounterButtons">
 						<button
 							type="button"
