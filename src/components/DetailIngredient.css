@@ -42,8 +42,6 @@
 	background-color: rgba(36, 35, 35, 0.5);
 }
 
-
-
 .ImageEffect {
 	width: 40px;
 	height: 40px;
@@ -51,7 +49,8 @@
 	border-radius: 8px;
 	background-color: rgba(0, 0, 0, 0.5);
 	padding: 1px;
-margin : 5px}
+	margin: 5px;
+}
 
 .NomIngredient {
 	display: flex;
@@ -66,7 +65,6 @@ margin : 5px}
 	justify-content: space-between;
 	flex: 1;
 }
-
 
 .MapButton {
 	border: #4442425d solid 2px;
@@ -143,12 +141,9 @@ margin : 5px}
 	border-radius: 18px;
 	max-width: 88vw;
 	max-height: 70vh;
-		margin-top: 70px;
-
-	
+	margin-top: 70px;
 }
-.Mapcard-container{
-
+.Mapcard-container {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -167,9 +162,9 @@ h3 {
 }
 
 .ingredient-detail {
-		gap: 6px;
-		padding: 0.3em;
-	}
+	gap: 6px;
+	padding: 0.3em;
+}
 @media (max-width: 900px) {
 	.MapButton {
 		height: 65px;
@@ -187,43 +182,37 @@ h3 {
 	}
 }
 
+.MapButton {
+	height: 55px;
+	width: 55px;
+}
 
+.BtnMinus,
+.BtnPlus {
+	width: 35px;
+	height: 35px;
+	font-size: 18px;
+}
 
-	.MapButton {
-		height: 55px;
-		width: 55px;
-	}
+.ImageIngredientsetting {
+	width: 55px;
+	height: 55px;
+}
 
-	.BtnMinus,
-	.BtnPlus {
-		width: 35px;
-		height: 35px;
-		font-size: 18px;
-	}
-
-	.ImageIngredientsetting {
-		width: 55px;
-		height: 55px;
-	}
-
-	.ImageEffect {
-		width: 28px;
-		height: 28px;
-	}
+.ImageEffect {
+	width: 28px;
+	height: 28px;
+}
 
 h4 {
 	margin: 0;
-	
 }
-
 
 @media (min-width: 480px) {
 	.ingredient-detail {
 		font-size: 16px;
 	}
 }
-
-
 
 @media (max-width: 400px) {
 	.ingredient-detail {
@@ -246,7 +235,7 @@ h4 {
 	.MapButton {
 		height: 45px;
 		width: 45px;
-		}
+	}
 
 	.ImageIngredientsetting {
 		width: 65px;
@@ -258,20 +247,17 @@ h4 {
 		height: 30px;
 	}
 
-.Mapcard {
-	align-items: center;
-	border-radius: 18px;
-	max-width: 90vw;
-	max-height: 47vh;
+	.Mapcard {
+		align-items: center;
+		border-radius: 18px;
+		max-width: 90vw;
+		max-height: 47vh;
 		margin-top: 70px;
-
-	
-}
-.Mapcard-container{
-
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-}
+	}
+	.Mapcard-container {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+	}
 }

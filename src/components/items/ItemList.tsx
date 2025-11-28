@@ -12,7 +12,7 @@ interface ItemListProps {
 export default function ItemList({ type, onSelect }: ItemListProps) {
 	const [items, setItems] = useState<(Ingredient | Recipe)[]>([]);
 	const [page, setPage] = useState(0);
-	const itemsPerPage = 16;
+	const itemsPerPage = 12;
 
 	useEffect(() => {
 		const API =
@@ -41,9 +41,15 @@ export default function ItemList({ type, onSelect }: ItemListProps) {
 						(invItem) => invItem.id === item.id,
 					).length;
 					return (
-					<ItemCard key={item.id} item={item} type={type} quantity={quantity} onSelect={onSelect} />
+						<ItemCard
+							key={item.id}
+							item={item}
+							type={type}
+							quantity={quantity}
+							onSelect={onSelect}
+						/>
 					);
-})}
+				})}
 			</div>
 
 			<div className="page-buttons">
