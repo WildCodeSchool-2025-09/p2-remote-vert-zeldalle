@@ -12,7 +12,7 @@ function NavigateBar() {
 	const ingredientActive = location.pathname === "/app/ingredients";
 
 	return (
-		<div className="navContainer">
+		<div className="nav-container">
 			<Link
 				to="/app/recettes"
 				className={`nav-card ${recipesActive ? "active" : ""}`}

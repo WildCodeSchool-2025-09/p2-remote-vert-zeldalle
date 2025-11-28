@@ -27,7 +27,7 @@ const router = createBrowserRouter([
 				element: <Recipes />,
 			},
 		],
-	},	
+	},
 ]);
 
 export default router;
