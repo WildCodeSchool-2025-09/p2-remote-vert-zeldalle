@@ -43,6 +43,7 @@ export default function DetailIngredient({
 
 	return (
 		<div className="ingredient-detail">
+			<div className="Left-detail">
 			<div className="ImageIngredient">
 				<img
 					className="ImageIngredientsetting"
@@ -50,19 +51,36 @@ export default function DetailIngredient({
 					alt={ingredient.name}
 				/>
 			</div>
-
+								<div className="ImageEffectsetting">
+						{ingredient.effect_image && (
+							<img
+								className="ImageEffect"
+								src={`/Iconesimg/${ingredient.effect_image}`}
+								alt={ingredient.effect}
+							/>
+						)}
+						{ingredient.hearts_image && (
+							<img
+								className="ImageEffect"
+								src={`/Iconesimg/${ingredient.hearts_image}`}
+								alt={ingredient.hearts_image}
+							/>
+						)}
+					</div>
+</div>
 			<div className="InfoIngredient">
 				<div className="NomIngredient">
-					<h4>{ingredient.name}</h4>
-					{ingredient.description}
+					<h3>{ingredient.name}</h3>
+					<p>{ingredient.description}</p>
 				</div>
 
+
+
+				<div className="RightDetails">
 				<button
 					type="button"
 					className="MapButton"
 					onClick={() => setIsMapOpen(true)}
-					width={100}
-					hight={70}
 				>
 					<img src="/images/MapButton.png" alt="" width={70} />
 				</button>
@@ -90,25 +108,6 @@ export default function DetailIngredient({
 						</div>
 					</div>
 				)}
-
-				<div className="RightDetails">
-					<div className="ImageEffectsetting">
-						{ingredient.effect_image && (
-							<img
-								className="ImageEffect"
-								src={`/Iconesimg/${ingredient.effect_image}`}
-								alt={ingredient.effect}
-							/>
-						)}
-						{ingredient.hearts_image && (
-							<img
-								className="ImageEffect"
-								src={`/Iconesimg/${ingredient.hearts_image}`}
-								alt={ingredient.hearts_image}
-							/>
-						)}
-					</div>
-					{/* Compteur */}
 					<div className="CounterButtons">
 						<button
 							type="button"

@@ -23,7 +23,6 @@ export default function Ingredients() {
 
 	const handleSelect = (ingredient: Ingredient) => {
 		setSelectedIngredient(ingredient);
-		addIngredient(ingredient);
 	};
 
 	return (

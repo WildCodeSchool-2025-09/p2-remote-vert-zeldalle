@@ -4,6 +4,7 @@ import type { InventoryItemProps } from "../type";
 type InventoryContextType = {
 	inventory: InventoryItemProps[];
 	addIngredient: (item: InventoryItemProps) => void;
+	removeIngredient: (id: number) => void;
 };
 
 const InventoryContext = createContext<InventoryContextType | undefined>(
@@ -16,16 +17,24 @@ export default function InventoryProvider({
 	children: ReactNode;
 }) {
 	const [inventory, setInventory] = useState<InventoryItemProps[]>([]);
+const removeIngredient = (id: number) => {
+	setInventory((prev) => {
+		const index = prev.findIndex(item => item.id === id);
+		if (index === -1) return prev;
 
-	const addIngredient = (item: InventoryItemProps) => {
-		setInventory((prev) => {
-			if (prev.find((i) => i.id === item.id)) return prev;
-			return [...prev, item];
-		});
-	};
+        const updated = [...prev];
+        updated.splice(index, 1);
 
+        return updated;
+	});
+};
+const addIngredient = (item: InventoryItemProps) => {
+	setInventory((prev) => [...prev, item]);
+};
 	return (
-		<InventoryContext.Provider value={{ inventory, addIngredient }}>
+		<InventoryContext.Provider
+			value={{ inventory, addIngredient, removeIngredient }}
+		>
 			{children}
 		</InventoryContext.Provider>
 	);
