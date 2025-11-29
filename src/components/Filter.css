@@ -1,125 +1,214 @@
+body {
+	display: flex;
+	flex-direction: column;
+	align-items: center; /* centre horizontalement */
+	height: 100vh;
+}
+
+/*-------------------------- Filter bar -----------------------*/
+
 .filter-bar {
 	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	grid-template-rows: auto;
-	flex-wrap: wrap;
-	justify-content: center;
-	align-items: center;
-	flex-direction: row;
-	margin-left: 7.5%;
-	max-width: 85%;
-	max-height: 137px;
+	grid-template-columns: auto auto;
+	grid-template-rows: auto auto;
 	align-items: flex-start;
+	margin-left: 5%;
+	width: 375px;
+	height: 137px;
 	background-color: rgba(0, 0, 0, 0.5);
 	border-bottom-left-radius: 10px;
 	border-bottom-right-radius: 10px;
 }
 
-/* --------------------------Hearts ----------------------- */
+/* -------------------------- Hearts ----------------------- */
 
-.heart-bar {
+.heart-section {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-	max-width: 180px;
-	gap: 3px;
+	align-items: center;
 	grid-column: 1;
 	grid-row: 1;
-}
-
-.heart-bar img {
-	max-width: 30px;
-	max-height: 24px;
-}
-
-.heart-wrapper {
 	position: relative;
-	width: 30px;
-	height: 24px;
+	width: fit-content;
+	margin-left: 5%;
+	height: 40px;
 }
 
-.heart-wrapper img {
+.heart-bar {
+	margin-top: 10px;
+	display: flex;
+	flex-wrap: wrap;
+	row-gap: 6px;
+	width: 195px;
+	row-gap: 10px;
+	margin-left: 22px;
+	column-gap: 3px;
+}
+
+.heart-controls {
+	position: absolute;
+	margin-top: 10px;
+	top: 46px;
+	left: -6px;
+	display: flex;
+	flex-direction: column-reverse;
+	row-gap: 10px;
+	width: 30px;
+	height: 30px;
+}
+
+.heart-controls button {
+	width: 30px;
+	height: 30px;
+	background-color: rgba(0, 0, 0, 0.5);
+	color: white;
+	font-size: 25px;
+	text-align: center;
+	border-radius: 10px;
+	border: 1px solid white;
+
+	cursor: pointer;
+}
+
+.heart-slot {
+	position: relative;
+	width: 36px;
+	height: 30px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	left: 5px;
+	top: 6px;
+}
+
+.heart-slot img {
 	width: 100%;
-	height: auto;
-	display: block;
+	height: 100%;
+	object-fit: contain;
 }
 
 .heart-click-zone {
 	position: absolute;
 	top: 0;
-	left: 0;
 	height: 100%;
+	width: 25%;
 	cursor: pointer;
+	z-index: 1;
 }
 
-.heart-click-zone.zone-25 {
-	left: 0;
-	width: 25%;
+.zone-25 {
+	left: 0%;
 }
-.heart-click-zone.zone-50 {
+.zone-50 {
 	left: 25%;
-	width: 25%;
 }
-.heart-click-zone.zone-75 {
+.zone-75 {
 	left: 50%;
-	width: 25%;
 }
-.heart-click-zone.zone-100 {
+.zone-100 {
 	left: 75%;
-	width: 25%;
 }
 
-/* --------------------------Effects ----------------------- */
-
+/* -------------------------- Effects ----------------------- */
 .effect-bar {
 	display: flex;
-	gap: 3px;
-	align-items: center;
+	gap: 5px;
 	grid-column: 1;
 	grid-row: 2;
+	margin-left: 5px;
+	margin-top: 2px;
 }
 
 .effect-bar button {
 	display: flex;
 	width: 30px;
 	height: 30px;
-	border-color: white;
+	border: 1px solid white;
 	border-radius: 10px;
 	background-color: rgba(0, 0, 0, 0.5);
 	justify-content: center;
 	align-items: center;
+	cursor: pointer;
+	gap: 3px;
+	transition: transform 0.2s ease, border-color 0.2s ease;
 }
 
 .effect-bar button.active {
 	border-color: gold;
+	transform: scale(1.1);
 }
 
 .effect-bar button img {
 	width: 24px;
-	justify-content: center;
-	align-items: center;
 }
 
-/* --------------------------Type ----------------------- */
-
+/* -------------------------- Type ----------------------- */
 .type-bar {
 	display: flex;
 	flex-wrap: wrap;
 	flex-direction: row;
-	width: 130px;
-	gap: 4px;
+	width: 140px;
+	gap: 5px;
 	align-items: center;
 	grid-column: 2;
 	grid-row: 1;
+	margin-top: 8px;
+	margin-left: 18px;
 }
 
 .type-bar button {
 	display: flex;
 	width: 40px;
 	height: 40px;
-	border-color: white;
+	border: 1px solid white;
 	border-radius: 10px;
 	background-color: rgba(0, 0, 0, 0.5);
 	justify-content: center;
 	align-items: center;
+	cursor: pointer;
+	transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.type-bar button.active {
+	border-color: gold;
+	transform: scale(1.1);
+}
+
+/* -------------------------- Searchbar ----------------------- */
+
+.search-bar {
+	grid-column: 2;
+	grid-row: 2;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	width: 150px;
+	height: 30px;
+	margin-right: 4px;
+	margin-top: 2px;
+	font-size: 20px;
+}
+
+.search-bar input {
+	flex: 1;
+	height: 30px;
+	border-radius: 10px;
+	background-color: rgb(254, 254, 254);
+	width: 144px;
+	height: 26px;
+	padding-left: 5px;
+}
+.suggestions {
+	position: absolute;
+	top: 100%;
+	left: -4px;
+	width: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	border-radius: 10px;
+	z-index: 10;
+	margin-top: 4px;
+	list-style: none;
+	padding: 4px;
 }

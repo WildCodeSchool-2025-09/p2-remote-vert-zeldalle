@@ -1,37 +1,29 @@
 import { useState } from "react";
 import Filters from "./components/Filters";
-import IngredientTest from "./components/IngredientTest";
 import "./reset.css";
-import type { FilterKey, TypeKey } from "./components/Filters";
 import { Outlet } from "react-router";
+import type { FilterKey, TypeKey } from "./type";
 import "./App.css";
+import { FiltersContext } from "./components/contexts/FiltersContext";
 
 function App() {
-	const [Hearts, setHearts] = useState(0);
-
-	const [filters, setEffects] = useState<Record<FilterKey, boolean>>(
-		{} as Record<FilterKey, boolean>,
-	);
-
-	const [types, setTypes] = useState<Record<TypeKey, boolean>>(
-		{} as Record<TypeKey, boolean>,
+	const [hearts, setHearts] = useState(0);
+	const [types, setTypes] = useState<Partial<Record<TypeKey, boolean>>>({});
+	const [filters, setFilters] = useState<Partial<Record<FilterKey, boolean>>>(
+		{},
 	);
 
 	return (
-		<>
-		<header className="App">
+		<FiltersContext.Provider
+			value={{ hearts, filters, types, setHearts, setFilters, setTypes }}
+		>
 			<Filters
 				HeartsChange={setHearts}
-				EffectsChange={setEffects}
+				EffectsChange={setFilters}
 				TypesChange={setTypes}
 			/>
-
-			<IngredientTest filters={filters} hearts={Hearts} type={types} />
-		</header>
-		<main>
 			<Outlet />
-		</main>
-		</>	
+		</FiltersContext.Provider>
 	);
 }
 

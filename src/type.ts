@@ -9,6 +9,7 @@ export interface Recipe {
 	image: string;
 	effect_image: string;
 	heart_image: string;
+	ingredients?: Ingredient[];
 }
 
 export interface Ingredient {
@@ -46,3 +47,42 @@ export interface RecipeDetailProps {
 export type SelectedItem =
 	| { type: "recipe"; item: Recipe }
 	| { type: "ingredient"; item: Ingredient };
+
+export type TypeKey =
+	| "meats"
+	| "fruitsvegetables"
+	| "minerals"
+	| "insects"
+	| "fishs"
+	| "monsters";
+
+export type FilterKey =
+	| "cold"
+	| "stamina"
+	| "heat"
+	| "mighty"
+	| "sneaky"
+	| "climbing";
+
+export const effectMap: Record<FilterKey, string[]> = {
+	cold: ["Résistance au froid"],
+	stamina: ["Augmente l'endurance"],
+	heat: ["Résistance à la chaleur"],
+	mighty: ["Augmente l'attaque"],
+	sneaky: ["Augmente la furtivité"],
+	climbing: ["Augmente la vitesse d'escalade"],
+};
+
+export const typeMap: Record<TypeKey, string[]> = {
+	meats: ["Viande"],
+	fruitsvegetables: ["Fruits/Légumes"],
+	minerals: ["Minéraux"],
+	insects: ["Insectes"],
+	fishs: ["Poissons"],
+	monsters: ["Monstres"],
+};
+
+export type Suggestion = {
+	name: string;
+	kind: "ingredient" | "recette";
+};
