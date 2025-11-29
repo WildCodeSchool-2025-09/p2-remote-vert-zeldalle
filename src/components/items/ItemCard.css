@@ -7,8 +7,11 @@
 	transition: border-color 0.2s, box-shadow 0.2s;
 	border-radius: 10px;
 	background-color: var(--color-overlay);
+	width: calc(25% - 10px);
 	aspect-ratio: 1 / 1;
 	gap: 10px;
+	max-width: 150px;
+	min-width: 80px;
 }
 
 .item-card.selected {

@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import { INGREDIENTS_API } from "../constants";
 import type { Ingredient, RecipeDetailProps } from "../type";
-import ItemCard from "./items/ItemCard";
 import "./RecipeDetail.css";
-import { Link } from "react-router";
 
 function RecipeDetail({ recipe, onIngredientSelect }: RecipeDetailProps) {
 	const [ingredients, setIngredients] = useState<Ingredient[]>([]);
@@ -21,13 +19,7 @@ function RecipeDetail({ recipe, onIngredientSelect }: RecipeDetailProps) {
 	return (
 		<section className="detail-item">
 			<div className="recipe-img">
-				<ItemCard
-					item={recipe}
-					type="recipe"
-					count={0}
-					onIncrement={() => {}}
-					onSelect={() => {}}
-				/>
+				<img src={`/images/recipes/${recipe.image}`} alt={recipe.name} />
 			</div>
 
 			<div className="recipe-info">
