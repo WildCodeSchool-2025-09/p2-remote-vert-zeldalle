@@ -1,20 +1,18 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "./App";
+import Home from "./pages/Home";
 import Ingredients from "./pages/Ingredients";
 import Inventory from "./pages/Inventory";
 import Recipes from "./pages/Recipes";
-import Home from "./pages/Home";
 
 const router = createBrowserRouter([
 	{
 		path: "/",
-		element: <Home />
+		element: <Home />,
 	},
 	{
 		path: "app",
-		element: (
-				<App />
-		),
+		element: <App />,
 		children: [
 			{
 				path: "inventory",

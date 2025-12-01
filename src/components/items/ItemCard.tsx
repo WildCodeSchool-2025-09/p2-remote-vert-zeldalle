@@ -1,7 +1,12 @@
 import type { Ingredient, ItemCardProps, Recipe } from "../../type";
 import "./ItemCard.css";
 
-export default function ItemCard({item, type, onSelect, quantity}: ItemCardProps) {
+export default function ItemCard({
+	item,
+	type,
+	onSelect,
+	quantity,
+}: ItemCardProps) {
 	const imagePath =
 		type === "ingredient"
 			? `/images/ingredients/${(item as Ingredient).image}`

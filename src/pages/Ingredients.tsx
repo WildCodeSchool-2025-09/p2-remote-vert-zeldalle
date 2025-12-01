@@ -2,16 +2,12 @@ import { useEffect, useState } from "react";
 import DetailIngredient from "../components/DetailIngredient";
 import ItemList from "../components/items/ItemList";
 import { INGREDIENTS_API } from "../constants";
-import { useInventory } from "../contexts/InventoryContext";
 import type { Ingredient } from "../type";
 
 export default function Ingredients() {
 	const [ingredients, setIngredients] = useState<Ingredient[]>([]);
 	const [selectedIngredient, setSelectedIngredient] =
 		useState<Ingredient | null>(null);
-	const { addIngredient } = useInventory();
-
-	const API = import.meta.env.VITE_API_INGREDIENTS;
 
 	useEffect(() => {
 		fetch(INGREDIENTS_API)

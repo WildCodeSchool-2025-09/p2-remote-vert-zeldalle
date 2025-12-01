@@ -5,7 +5,7 @@ import { useInventory } from "../contexts/InventoryContext";
 import "./Inventory.css";
 
 function Inventory() {
-	const { inventory, addIngredient, removeIngredient } = useInventory();
+	const { inventory } = useInventory();
 	const [selectedItem, setSelectedItem] = useState(inventory[0]);
 
 	const handleSelect = (item) => {
@@ -22,18 +22,18 @@ function Inventory() {
 	);
 	return (
 		<div className="Inventory-page">
-		<div className="inventory-grid">
-			{groupedInventory.map((item) => (
-				<ItemCard
-					key={item.id}
-					item={item}
-					type="ingredient"
-					quantity={item.quantity}
-					onSelect={() => handleSelect(item)}
-				/>
-			))}
-		</div>
-		<DetailIngredient ingredient={selectedItem} />
+			<div className="inventory-grid">
+				{groupedInventory.map((item) => (
+					<ItemCard
+						key={item.id}
+						item={item}
+						type="ingredient"
+						quantity={item.quantity}
+						onSelect={() => handleSelect(item)}
+					/>
+				))}
+			</div>
+			<DetailIngredient ingredient={selectedItem} />
 		</div>
 	);
 }

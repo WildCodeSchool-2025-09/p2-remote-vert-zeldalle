@@ -1,9 +1,9 @@
 import "./Home.css";
+import { Link } from "react-router-dom";
+import CookingPot3DOk from "../components/CookingPot3DOk";
 import homeButton from "../components/assets/homeButton.webp";
 import homeSurtitle from "../components/assets/homeSurtitle.png";
 import homeSymbolTriforce from "../components/assets/homeSymbolTriforce.png";
-import { Link } from "react-router-dom";
-import CookingPot3DOk from "../components/CookingPot3DOk";
 
 export default function Home() {
 	return (

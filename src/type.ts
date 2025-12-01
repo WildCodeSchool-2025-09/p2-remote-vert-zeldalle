@@ -30,6 +30,7 @@ export interface ItemCardProps {
 	item: Ingredient | Recipe;
 	type: "ingredient" | "recipe";
 	count: number;
+	quantity: number;
 	onIncrement: () => void;
 	onSelect?: (selection: SelectedItem) => void;
 }
@@ -37,7 +38,7 @@ export interface ItemCardProps {
 export interface ItemListProps {
 	items: (Ingredient | Recipe)[];
 	type: "ingredient" | "recipe";
-	onSelect?: React.Dispatch<React.SetStateAction<SelectedItem | null>>;
+	onSelect?: React.Dispatch<React.SetStateAction<SelectedItem | null>>
 }
 
 export interface RecipeDetailProps {
