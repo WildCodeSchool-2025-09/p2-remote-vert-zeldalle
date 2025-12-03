@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
-import type { Ingredient, Recipe } from "../../type";
-import ItemCard from "./ItemCard";
+import { useState, useEffect, useRef } from "react";
 import "./ItemList.css";
-import { useInventory } from "../../contexts/InventoryContext";
+import ItemCard from "./ItemCard";
+import type { Ingredient, Recipe } from "../../type";
 
 interface ItemListProps {
 	type: "ingredient" | "recipe";
@@ -10,8 +9,11 @@ interface ItemListProps {
 }
 
 export default function ItemList({ type, onSelect }: ItemListProps) {
-	const [items, setItems] = useState<(Ingredient | Recipe)[]>([]);
+	const [items, setItems] = useState<Ingredient[] | Recipe[]>([]);
 	const [page, setPage] = useState(0);
+	const [selectedId, setSelectedId] = useState<number | null>(null);
+
+	const scrollRef = useRef<HTMLDivElement | null>(null);
 	const itemsPerPage = 12;
 
 	useEffect(() => {
@@ -22,53 +24,57 @@ export default function ItemList({ type, onSelect }: ItemListProps) {
 
 		fetch(API)
 			.then((res) => res.json())
-			.then((data) => setItems(data))
+			.then((data) => {
+				if (type === "ingredient") {
+					setItems(data as Ingredient[]);
+				} else {
+					setItems(data as Recipe[]);
+				}
+			})
 			.catch(() => console.error("❌ Erreur chargement items"));
 	}, [type]);
-	const { inventory } = useInventory();
-
-	const currentItems = items.slice(
-		page * itemsPerPage,
-		(page + 1) * itemsPerPage,
-	);
 	const totalPages = Math.ceil(items.length / itemsPerPage);
+
+	const pages: (Ingredient | Recipe)[][] = [];
+	for (let i = 0; i < totalPages; i++) {
+		const start = i * itemsPerPage;
+		const end = start + itemsPerPage;
+		pages.push(items.slice(start, end));
+	}
+
+	const handleScroll = () => {
+		const container = scrollRef.current;
+		if (!container) return;
+
+		const newPage = Math.round(container.scrollLeft / container.clientWidth);
+
+		if (newPage !== page) setPage(newPage);
+	};
 
 	return (
 		<section className="item-list-wrapper">
-			<div className="item-list">
-				{currentItems.map((item) => {
-					const quantity = inventory.filter(
-						(invItem) => invItem.id === item.id,
-					).length;
-					return (
-						<ItemCard
-							key={item.id}
-							item={item}
-							type={type}
-							quantity={quantity}
-							onSelect={onSelect}
-						/>
-					);
-				})}
+			<div className="item-list" ref={scrollRef} onScroll={handleScroll}>
+				{pages.map((pageItems, pageIndex) => (
+					<div className="item-page" key={pageIndex}>
+						{pageItems.map((item) => (
+							<ItemCard
+								key={item.id}
+								item={item}
+								type={type}
+								isSelected={selectedId === item.id}
+								onSelect={() => {
+									setSelectedId(item.id);
+									onSelect(item);
+								}}
+							/>
+						))}
+					</div>
+				))}
 			</div>
-
-			<div className="page-buttons">
-				<button
-					type="button"
-					className="left-arrow"
-					onClick={() => setPage(page - 1)}
-					disabled={page === 0}
-				>
-					<img src="/images/nav/left.png" alt="flèche gauche" />
-				</button>
-				<button
-					type="button"
-					className="right-arrow"
-					onClick={() => setPage(page + 1)}
-					disabled={page + 1 >= totalPages}
-				>
-					<img src="/images/nav/right.png" alt="flèche droite" />
-				</button>
+			<div className="pagination-dots">
+				{pages.map((_, i) => (
+					<span key={i} className={i === page ? "dot active" : "dot"} />
+				))}
 			</div>
 		</section>
 	);

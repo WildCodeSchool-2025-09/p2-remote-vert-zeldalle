@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "./Items/ItemList.css";
+import "./items/ItemList.css";
 import { useInventory } from "../contexts/InventoryContext";
 import type { Ingredient } from "../type";
 import "./DetailIngredient.css";
@@ -71,7 +71,7 @@ export default function DetailIngredient({
 			<div className="InfoIngredient">
 				<div className="NomIngredient">
 					<h3>{ingredient.name}</h3>
-					<p>{ingredient.description}</p>
+					{ingredient.description}
 				</div>
 
 				<div className="RightDetails">

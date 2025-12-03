@@ -27,22 +27,24 @@ export interface Ingredient {
 }
 
 export interface ItemCardProps {
-	item: Ingredient | Recipe;
-	type: "ingredient" | "recipe";
-	count: number;
-	quantity: number;
-	onIncrement: () => void;
-	onSelect?: (selection: SelectedItem) => void;
-}
+		item: Ingredient | Recipe;
+		type: "ingredient" | "recipe";
+		count?: number;
+		quantity: number;
+		onIncrement?: () => void;
+		onSelect?: (item: Ingredient | Recipe) => void;
+		isSelected?: boolean;
+	}
 
 export interface ItemListProps {
 	items: (Ingredient | Recipe)[];
 	type: "ingredient" | "recipe";
-	onSelect?: React.Dispatch<React.SetStateAction<SelectedItem | null>>;
+	onSelect?: (item: Ingredient | Recipe) => void;
 }
 
 export interface RecipeDetailProps {
 	recipe: Recipe;
+	onIngredientSelect: (ingredient: Ingredient) => void;
 }
 
 export type SelectedItem =
