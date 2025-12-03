@@ -5,15 +5,20 @@ export default function ItemCard({
 	item,
 	type,
 	onSelect,
+	quantity,
 	isSelected,
-}: ItemCardProps) {
+}: ItemCardProps & { quantity?: number }) {
 	const imagePath =
 		type === "ingredient"
 			? `/images/ingredients/${(item as Ingredient).image}`
 			: `/images/recipes/${(item as Recipe).image}`;
 
 	const handleClick = () => {
-		onSelect?.(item);
+		if (type === "ingredient") {
+			onSelect(item as Ingredient);
+		} else {
+			onSelect({ item, type });
+		}
 	};
 
 	return (
@@ -27,6 +32,9 @@ export default function ItemCard({
 				alt={item.name}
 				onError={() => console.warn("Image introuvable :", imagePath)}
 			/>
+			{quantity !== undefined && quantity > 0 && (
+				<p className="quantity">{quantity} </p>
+			)}
 		</button>
 	);
 }

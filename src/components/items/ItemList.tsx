@@ -1,59 +1,88 @@
-import { useRef, useState } from "react";
-import type { ItemListProps } from "../../type";
+import { useEffect, useRef, useState } from "react";
 import "./ItemList.css";
+import { useInventory } from "../../contexts/InventoryContext";
+import type { Ingredient, Recipe } from "../../type";
 import ItemCard from "./ItemCard";
 
-export default function ItemList({ items, type, onSelect }: ItemListProps) {
-	const itemsPerPage = 12;
-	const totalPages = Math.ceil(items.length / itemsPerPage);
-	const pages = [];
+interface ItemListProps {
+	type: "ingredient" | "recipe";
+	onSelect: (item: Ingredient | Recipe) => void;
+}
 
+export default function ItemList({ type, onSelect }: ItemListProps) {
+	const [items, setItems] = useState<Ingredient[] | Recipe[]>([]);
+	const [page, setPage] = useState(0);
+	const [selectedId, setSelectedId] = useState<number | null>(null);
+	const { inventory } = useInventory();
+
+	const scrollRef = useRef<HTMLDivElement | null>(null);
+	const itemsPerPage = 12;
+
+	useEffect(() => {
+		const API =
+			type === "ingredient"
+				? import.meta.env.VITE_API_INGREDIENTS
+				: import.meta.env.VITE_API_RECIPES;
+
+		fetch(API)
+			.then((res) => res.json())
+			.then((data) => {
+				if (type === "ingredient") {
+					setItems(data as Ingredient[]);
+				} else {
+					setItems(data as Recipe[]);
+				}
+			})
+			.catch(() => console.error("❌ Erreur chargement items"));
+	}, [type]);
+	const totalPages = Math.ceil(items.length / itemsPerPage);
+
+	const pages: (Ingredient | Recipe)[][] = [];
 	for (let i = 0; i < totalPages; i++) {
 		const start = i * itemsPerPage;
-		const end = (i + 1) * itemsPerPage;
+		const end = start + itemsPerPage;
 		pages.push(items.slice(start, end));
 	}
 
-	const [page, setPage] = useState(0);
-	const scrollRef = useRef<HTMLDivElement | null>(null);
-
 	const handleScroll = () => {
-		const contItemList = scrollRef.current;
-		if (!contItemList) return;
+		const container = scrollRef.current;
+		if (!container) return;
 
-		const scrollLeft = contItemList.scrollLeft;
-		const width = contItemList.clientWidth;
+		const newPage = Math.round(container.scrollLeft / container.clientWidth);
 
-		const newPage = Math.round(scrollLeft / width);
 		if (newPage !== page) setPage(newPage);
 	};
-
-	const [selectedId, setSelectedId] = useState<number | null>(null);
 
 	return (
 		<section className="item-list-wrapper">
 			<div className="item-list" ref={scrollRef} onScroll={handleScroll}>
 				{pages.map((pageItems) => (
-					<div className="item-page" key={pageItems[0].id}>
+					<div className="item-page" key={pageItems[0]?.id}>
 						{pageItems.map((item) => (
 							<ItemCard
 								key={item.id}
 								item={item}
 								type={type}
-								onSelect={(item) => {
+								isSelected={selectedId === item.id}
+								quantity={
+									type === "ingredient"
+										? inventory.filter((i) => i.id === item.id).length
+										: undefined
+								}
+								onSelect={() => {
 									setSelectedId(item.id);
-									onSelect?.(item);
+									onSelect(item);
 								}}
-								isSelected={item.id === selectedId}
 							/>
 						))}
 					</div>
 				))}
 			</div>
+
 			<div className="pagination-dots">
 				{pages.map((pageItems, i) => (
 					<span
-						key={pageItems[0].id}
+						key={pageItems.map((p) => p.id).join("-")}
 						className={i === page ? "dot active" : "dot"}
 					/>
 				))}

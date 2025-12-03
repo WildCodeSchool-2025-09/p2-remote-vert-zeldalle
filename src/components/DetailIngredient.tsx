@@ -68,10 +68,11 @@ export default function DetailIngredient({
 					)}
 				</div>
 			</div>
+
 			<div className="InfoIngredient">
 				<div className="NomIngredient">
 					<h3>{ingredient.name}</h3>
-					{ingredient.description}
+					<p>{ingredient.description}</p>
 				</div>
 
 				<div className="RightDetails">
@@ -106,6 +107,7 @@ export default function DetailIngredient({
 							</div>
 						</div>
 					)}
+
 					<div className="CounterButtons">
 						<button
 							type="button"

@@ -5,9 +5,11 @@ import "./RecipeDetail.css";
 
 function RecipeDetail({ recipe, onIngredientSelect }: RecipeDetailProps) {
 	const [ingredients, setIngredients] = useState<Ingredient[]>([]);
-	const recipeIngredients = ingredients.filter((ingredient) =>
-		recipe.ingredient_ids.includes(ingredient.id),
-	);
+	const recipeIngredients = recipe?.ingredient_ids
+		? ingredients.filter((ingredient) =>
+				recipe.ingredient_ids.includes(ingredient.id),
+			)
+		: [];
 
 	useEffect(() => {
 		fetch(INGREDIENTS_API)
@@ -36,7 +38,7 @@ function RecipeDetail({ recipe, onIngredientSelect }: RecipeDetailProps) {
 				</div>
 
 				<div className="effect-duration">
-					<img src="/images/effects/timerIcon.png" alt="Durée de l'effet" />
+					<img src="/images/effects/timerIcon.png" alt="DurÃ©e de l'effet" />
 					<span className="text-duration">{recipe.duration}</span>
 				</div>
 

@@ -11,15 +11,24 @@ function Inventory() {
 	const handleSelect = (item) => {
 		setSelectedItem(item);
 	};
-
+	const groupedInventory = Object.values(
+		inventory.reduce((acc, item) => {
+			if (!acc[item.id]) {
+				acc[item.id] = { ...item, quantity: 0 };
+			}
+			acc[item.id].quantity += 1;
+			return acc;
+		}, {}),
+	);
 	return (
-		<div className="inventory-list">
+		<div className="inventory-page">
 			<div className="inventory-grid">
-				{inventory.map((item) => (
+				{groupedInventory.map((item) => (
 					<ItemCard
 						key={item.id}
 						item={item}
 						type="ingredient"
+						quantity={item.quantity}
 						onSelect={() => handleSelect(item)}
 					/>
 				))}
