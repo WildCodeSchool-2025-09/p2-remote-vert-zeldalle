@@ -5,11 +5,11 @@ import "./RecipeDetail.css";
 
 function RecipeDetail({ recipe, onIngredientSelect }: RecipeDetailProps) {
 	const [ingredients, setIngredients] = useState<Ingredient[]>([]);
-const recipeIngredients = recipe?.ingredient_ids
-    ? ingredients.filter((ingredient) =>
-          recipe.ingredient_ids.includes(ingredient.id),
-      )
-    : [];
+	const recipeIngredients = recipe?.ingredient_ids
+		? ingredients.filter((ingredient) =>
+				recipe.ingredient_ids.includes(ingredient.id),
+			)
+		: [];
 
 	useEffect(() => {
 		fetch(INGREDIENTS_API)

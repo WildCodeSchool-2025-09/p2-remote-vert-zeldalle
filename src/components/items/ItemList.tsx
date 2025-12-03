@@ -1,8 +1,8 @@
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./ItemList.css";
-import ItemCard from "./ItemCard";
-import type { Ingredient, Recipe } from "../../type";
 import { useInventory } from "../../contexts/InventoryContext";
+import type { Ingredient, Recipe } from "../../type";
+import ItemCard from "./ItemCard";
 
 interface ItemListProps {
 	type: "ingredient" | "recipe";
@@ -56,8 +56,8 @@ export default function ItemList({ type, onSelect }: ItemListProps) {
 	return (
 		<section className="item-list-wrapper">
 			<div className="item-list" ref={scrollRef} onScroll={handleScroll}>
-				{pages.map((pageItems, pageIndex) => (
-					<div className="item-page" key={pageIndex}>
+				{pages.map((pageItems) => (
+					<div className="item-page" key={pageItems[0]?.id}>
 						{pageItems.map((item) => (
 							<ItemCard
 								key={item.id}
@@ -80,8 +80,11 @@ export default function ItemList({ type, onSelect }: ItemListProps) {
 			</div>
 
 			<div className="pagination-dots">
-				{pages.map((_, i) => (
-					<span key={i} className={i === page ? "dot active" : "dot"} />
+				{pages.map((pageItems, i) => (
+					<span
+						key={pageItems.map((p) => p.id).join("-")}
+						className={i === page ? "dot active" : "dot"}
+					/>
 				))}
 			</div>
 		</section>
