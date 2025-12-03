@@ -1,0 +1,270 @@
+.ingredient-detail {
+	position: relative;
+	display: flex;
+	justify-content: flex-start;
+	justify-content: flex-start;
+	align-items: center;
+	margin: 1em 2em;
+	background-color: #fff;
+	border-radius: 10px;
+	box-shadow: inset 0px 0px 5px 2px rgba(0, 0, 0, 0.5);
+	font-size: 14px;
+	font-size: 14px;
+	gap: 10px;
+	flex-wrap: nowrap;
+}
+
+.ImageIngredient {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 10px;
+	position: relative;
+	z-index: 10;
+	width: 70px;
+	height: 70px;
+	margin-left: 5px;
+	margin-top: 5px;
+	width: 70px;
+	height: 70px;
+	margin-left: 5px;
+	margin-top: 5px;
+}
+
+.ImageIngredientsetting {
+	width: 70px;
+	height: 70px;
+	object-fit: cover;
+	border-radius: 8px;
+	width: 70px;
+	height: 70px;
+	object-fit: cover;
+	border-radius: 8px;
+	z-index: 100;
+}
+
+.ImageIngredient::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	border-radius: 10px;
+	z-index: 1;
+	background-color: rgba(36, 35, 35, 0.5);
+	background-color: rgba(36, 35, 35, 0.5);
+}
+
+.ImageEffect {
+	width: 40px;
+	height: 40px;
+	object-fit: cover;
+	border-radius: 8px;
+	background-color: rgba(0, 0, 0, 0.5);
+	padding: 1px;
+	margin: 5px;
+}
+
+.NomIngredient {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	text-align: center;
+}
+
+.InfoIngredient {
+	display: flex;
+	gap: 10px;
+	justify-content: space-between;
+	flex: 1;
+	flex: 1;
+}
+
+.MapButton {
+	border: #4442425d solid 2px;
+	border-radius: 10px;
+	height: 80px;
+	width: 80px;
+	padding: 0;
+	overflow: hidden;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-right: 35px;
+}
+
+.CounterButtons {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.BtnMinus,
+.BtnPlus {
+	width: 45px;
+	height: 45px;
+	border-radius: 8px;
+	border: none;
+	font-size: 22px;
+	cursor: pointer;
+	font-weight: bold;
+	background-color: #f4f4f4;
+	transition: 0.2s;
+}
+
+.CountNumber {
+	width: 30px;
+	text-align: center;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.modal-overlay {
+	position: fixed;
+	inset: 0;
+	background-color: rgba(0, 0, 0, 0.7);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 1000;
+	transition-duration: 1s;
+}
+.modal-content {
+	border-radius: 8px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+.CloseMapButton {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	background-color: #020202;
+	color: white;
+	border: none;
+	border-radius: 10%;
+	width: 50px;
+	height: 50px;
+	font-size: 16px;
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 10000;
+	z-index: 10000;
+}
+.Mapcard {
+	align-items: center;
+	border-radius: 18px;
+	max-width: 88vw;
+	max-height: 65vh;
+}
+.Mapcard-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+.RightDetails {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	flex: 1;
+	margin-top: 5px;
+}
+h3 {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.ingredient-detail {
+	gap: 6px;
+	padding: 3%;
+}
+@media (max-width: 900px) {
+	.MapButton {
+		height: 65px;
+		width: 65px;
+	}
+
+	.ImageIngredientsetting {
+		width: 60px;
+		height: 60px;
+	}
+
+	.ImageEffect {
+		width: 32px;
+		height: 32px;
+	}
+}
+
+.MapButton {
+	height: 55px;
+	width: 55px;
+}
+
+.BtnMinus,
+.BtnPlus {
+	width: 35px;
+	height: 35px;
+	font-size: 18px;
+}
+
+.ImageIngredientsetting {
+	width: 55px;
+	height: 55px;
+}
+
+.ImageEffect {
+	width: 28px;
+	height: 28px;
+}
+
+h4 {
+	margin: 0;
+}
+
+@media (min-width: 480px) {
+	.ingredient-detail {
+		font-size: 16px;
+	}
+}
+
+@media (max-width: 400px) {
+	.ingredient-detail {
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.NomIngredient {
+		width: 100%;
+		align-items: center;
+		text-align: center;
+	}
+
+	.MapButton {
+		height: 45px;
+		width: 45px;
+	}
+
+	.ImageIngredientsetting {
+		width: 65px;
+		height: 65px;
+	}
+
+	.ImageEffect {
+		width: 30px;
+		height: 30px;
+	}
+
+	.Mapcard {
+		align-items: center;
+		border-radius: 18px;
+		max-width: 90vw;
+		max-height: 47vh;
+		margin-top: 70px;
+	}
+	.Mapcard-container {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+	}
+}

@@ -1,12 +1,17 @@
 import { useEffect, useState } from "react";
-import ItemList from "../components/Items/ItemList";
+import DetailIngredient from "../components/DetailIngredient";
+import ItemList from "../components/items/ItemList";
+import { INGREDIENTS_API } from "../constants";
+import { useInventory } from "../contexts/InventoryContext";
 import { useFilters } from "../components/contexts/FiltersContext";
 import type { Ingredient } from "../type";
 import { effectMap, typeMap } from "../type";
 
-function Ingredients() {
+export default function Ingredients() {
 	const [ingredients, setIngredients] = useState<Ingredient[]>([]);
-	const INGREDIENTS_API = import.meta.env.VITE_API_INGREDIENTS;
+	const [selectedIngredient, setSelectedIngredient] =
+		useState<Ingredient | null>(null);
+	const { addIngredient } = useInventory();
 
 	const { hearts, filters, types } = useFilters();
 

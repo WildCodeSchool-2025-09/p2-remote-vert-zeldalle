@@ -6,6 +6,8 @@ import type { FilterKey, TypeKey } from "./type";
 import "./App.css";
 import { FiltersContext } from "./components/contexts/FiltersContext";
 
+import NavigationBar from "./components/NavigationBar";
+
 function App() {
 	const [hearts, setHearts] = useState(0);
 	const [types, setTypes] = useState<Partial<Record<TypeKey, boolean>>>({});
@@ -23,6 +25,7 @@ function App() {
 				TypesChange={setTypes}
 			/>
 			<Outlet />
+			<NavigationBar />
 		</FiltersContext.Provider>
 	);
 }

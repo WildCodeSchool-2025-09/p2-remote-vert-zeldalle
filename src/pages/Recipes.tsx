@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import ItemList from "../components/Items/ItemList";
+import DetailIngredient from "../components/DetailIngredient";
 import RecipeDetail from "../components/RecipeDetail";
 import { useFilters } from "../components/contexts/FiltersContext";
 import { INGREDIENTS_API, RECIPES_API } from "../constants";
@@ -15,9 +15,9 @@ import { effectMap, typeMap } from "../type";
 function Recipes() {
 	const [recipes, setRecipes] = useState<Recipe[]>([]);
 	const [ingredients, setIngredients] = useState<Ingredient[]>([]);
-	const [selectedRecipe, setSelectedRecipe] = useState<SelectedItem | null>(
-		null,
-	);
+	const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null);
+	const [selectedIngredient, setSelectedIngredient] =
+		useState<Ingredient | null>(null);
 
 	const { hearts, filters, types } = useFilters();
 
@@ -95,6 +95,9 @@ function Recipes() {
 			)}
 			{selectedRecipe && selectedRecipe.type === "recipe" && (
 				<RecipeDetail recipe={selectedRecipe.item} />
+			)}
+			{selectedIngredient && (
+				<DetailIngredient ingredient={selectedIngredient} />
 			)}
 		</>
 	);
