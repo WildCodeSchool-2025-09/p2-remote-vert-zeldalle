@@ -25,13 +25,13 @@ export default function DetailIngredient({
 		setCount((prev) => prev + 1);
 	};
 
-		useEffect(() => {
-			const newQuantity = inventory.filter(
-				(item) => item.id === ingredient.id,
-			).length;
-			setCount(newQuantity);
-		}, [ingredient, inventory]);
-		
+	useEffect(() => {
+		const newQuantity = inventory.filter(
+			(item) => item.id === ingredient.id,
+		).length;
+		setCount(newQuantity);
+	}, [ingredient, inventory]);
+
 	const handleLessFromInventory = () => {
 		if (count > 0) {
 			removeIngredient(ingredient.id);
