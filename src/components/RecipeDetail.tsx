@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import { INGREDIENTS_API } from "../constants";
 import type { Ingredient, RecipeDetailProps } from "../type";
-import ItemCard from "./Items/ItemCard";
 import "./RecipeDetail.css";
 
-function RecipeDetail({ recipe }: RecipeDetailProps) {
+function RecipeDetail({ recipe, onIngredientSelect }: RecipeDetailProps) {
 	const [ingredients, setIngredients] = useState<Ingredient[]>([]);
-	const recipeIngredients = ingredients.filter((ingredient) =>
-		recipe.ingredient_ids.includes(ingredient.id),
-	);
+const recipeIngredients = recipe?.ingredient_ids
+    ? ingredients.filter((ingredient) =>
+          recipe.ingredient_ids.includes(ingredient.id),
+      )
+    : [];
 
 	useEffect(() => {
 		fetch(INGREDIENTS_API)
@@ -20,13 +21,7 @@ function RecipeDetail({ recipe }: RecipeDetailProps) {
 	return (
 		<section className="detail-item">
 			<div className="recipe-img">
-				<ItemCard
-					item={recipe}
-					type="recipe"
-					count={0}
-					onIncrement={() => {}}
-					onSelect={() => {}}
-				/>
+				<img src={`/images/recipes/${recipe.image}`} alt={recipe.name} />
 			</div>
 
 			<div className="recipe-info">
@@ -42,6 +37,11 @@ function RecipeDetail({ recipe }: RecipeDetailProps) {
 					/>
 				</div>
 
+				<div className="effect-duration">
+					<img src="/images/effects/timerIcon.png" alt="DurÃ©e de l'effet" />
+					<span className="text-duration">{recipe.duration}</span>
+				</div>
+
 				<div className="heart-wrapper">
 					<img
 						src={`/images/effects/${recipe.heart_image}`}
@@ -50,19 +50,20 @@ function RecipeDetail({ recipe }: RecipeDetailProps) {
 					<span className="heart-count">{recipe.hearts}</span>
 				</div>
 
-				<div className="effect-duration">
-					<img src="/images/effects/timerIcon.png" alt="Durée de l'effet" />
-					<span className="text-duration">{recipe.duration}</span>
-				</div>
-
 				<article className="ingredient-img">
 					{recipeIngredients.map((ingredient) => (
-						<img
+						<button
+							type="button"
 							key={ingredient.id}
-							src={`/images/ingredients/${ingredient.image}`}
-							alt={ingredient.name}
-							className="ingredient-icon"
-						/>
+							className="ingredient-icon-btn"
+							onClick={() => onIngredientSelect(ingredient)}
+						>
+							<img
+								src={`/images/ingredients/${ingredient.image}`}
+								alt={ingredient.name}
+								className="ingredient-icon"
+							/>
+						</button>
 					))}
 				</article>
 			</div>

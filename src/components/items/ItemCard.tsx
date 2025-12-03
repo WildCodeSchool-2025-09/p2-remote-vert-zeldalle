@@ -6,7 +6,8 @@ export default function ItemCard({
 	type,
 	onSelect,
 	quantity,
-}: ItemCardProps) {
+	isSelected,
+}: ItemCardProps & { quantity?: number }) {
 	const imagePath =
 		type === "ingredient"
 			? `/images/ingredients/${(item as Ingredient).image}`
@@ -23,16 +24,17 @@ export default function ItemCard({
 	return (
 		<button
 			type="button"
-			className="item-card"
+			className={`item-card ${isSelected ? "selected" : ""}`}
 			onClick={handleClick}
-			style={{ cursor: "pointer" }}
 		>
 			<img
 				src={imagePath}
 				alt={item.name}
 				onError={() => console.warn("Image introuvable :", imagePath)}
 			/>
-			{quantity > 0 && <p className="quantity">{quantity} </p>}
+			{quantity !== undefined && quantity > 0 && (
+				<p className="quantity">{quantity} </p>
+			)}
 		</button>
 	);
 }

@@ -4,10 +4,19 @@
 	justify-content: center;
 	position: relative;
 	border: solid 1px white;
+	transition: border-color 0.2s, box-shadow 0.2s;
 	border-radius: 10px;
 	background-color: var(--color-overlay);
+	width: calc(25% - 10px);
 	aspect-ratio: 1 / 1;
 	gap: 10px;
+	max-width: 150px;
+	min-width: 80px;
+}
+
+.item-card.selected {
+	border-color: rgba(255, 199, 78);
+	box-shadow: 0 0 10px rgb(255, 199, 78);
 }
 
 .item-card img {
