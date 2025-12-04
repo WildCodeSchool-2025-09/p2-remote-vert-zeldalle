@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import DetailIngredient from "../components/DetailIngredient";
 import RecipeDetail from "../components/RecipeDetail";
-import { useFilters } from "../components/contexts/FiltersContext";
 import ItemList from "../components/items/ItemList";
 import { INGREDIENTS_API, RECIPES_API } from "../constants";
 import type {
@@ -12,6 +11,7 @@ import type {
 	TypeKey,
 } from "../type";
 import { effectMap, typeMap } from "../type";
+import { useFilters } from "../contexts/FiltersContext";
 
 function Recipes() {
 	const [recipes, setRecipes] = useState<Recipe[]>([]);

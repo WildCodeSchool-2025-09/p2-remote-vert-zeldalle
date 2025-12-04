@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./Filter.css";
 import { useFilters } from "../contexts/FiltersContext";
 
@@ -15,7 +15,6 @@ function Filters() {
 
 function Hearts() {
 	const { updateFilters } = useFilters();
-
 	const [hearts, setHearts] = useState<number>(0);
 
 	const updateHearts = (value: number) => {
@@ -93,21 +92,21 @@ export function Effects() {
 	const { updateFilters } = useFilters();
 	const [effects, setEffects] = useState<string[]>([]);
 
-	function toggleEffect(effect: string) {
+	function toggleEffect(effect: string) {		
 		setEffects((prev) => {
 			const exists = prev.includes(effect);
-
+			
 			if (exists) {
 				return prev.filter((e) => e !== effect);
 			}
 
 			return [...prev, effect];
 		});
-
-		updateFilters({
-			effects: effects,
-		});
 	}
+
+	useEffect(() => {
+		updateFilters({ effects });
+	}, [effects]);
 
 	return (
 		<div className="effect-bar">
@@ -180,11 +179,11 @@ function Categories() {
 
 			return [...prev, category];
 		});
-
-		updateFilters({
-			categories: categories,
-		});
 	}
+
+	useEffect(() => {
+		updateFilters({ categories });
+	}, [categories]);
 
 	return (
 		<div className="type-bar">

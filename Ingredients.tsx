@@ -16,23 +16,7 @@ export default function Ingredients() {
 
 	const { filters } = useFilters();
 
-	const filteredIngredients = ingredients.filter((item) => {
-		if (filters.hearts && item.hearts < filters.hearts) return false;
+	// Parcourir les filters pour filtrer les ingrédients
 
-		if (filters.effects && filters.effects.length > 0) {
-			if (!filters.effects.includes(item.effect)) return false;
-		}
-
-		if (filters.categories && filters.categories.length > 0) {
-			if (!filters.categories.includes(item.category)) return false;
-		}
-
-		if (filters.name && !item.name.toLowerCase().includes(filters.name.toLowerCase())) {
-			return false;
-		}
-
-		return true;
-	});
-
-	return <ItemList items={filteredIngredients} type="ingredient" />;
+	return <ItemList items={ingredients} type="ingredient" />;
 }
