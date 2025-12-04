@@ -4,7 +4,7 @@ import inventoryIcon from "../components/assets/IconInventaire.png";
 import recipesIcon from "../components/assets/IconRecette.png";
 import "./NavigationBar.css";
 
-function NavigateBar() {
+function NavigationBar() {
 	const location = useLocation();
 
 	const recipesActive = location.pathname === "/app/recettes";
@@ -40,4 +40,4 @@ function NavigateBar() {
 	);
 }
 
-export default NavigateBar;
+export default NavigationBar;

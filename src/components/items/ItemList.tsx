@@ -1,16 +1,15 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import "./ItemList.css";
 import { useInventory } from "../../contexts/InventoryContext";
 import type { Ingredient, Recipe } from "../../type";
 import ItemCard from "./ItemCard";
 
 interface ItemListProps {
+	items: Ingredient[] | Recipe[];
 	type: "ingredient" | "recipe";
-	onSelect: (item: Ingredient | Recipe) => void;
 }
 
-export default function ItemList({ type, onSelect }: ItemListProps) {
-	const [items, setItems] = useState<Ingredient[] | Recipe[]>([]);
+export default function ItemList({ items, type }: ItemListProps) {
 	const [page, setPage] = useState(0);
 	const [selectedId, setSelectedId] = useState<number | null>(null);
 	const { inventory } = useInventory();
@@ -18,23 +17,6 @@ export default function ItemList({ type, onSelect }: ItemListProps) {
 	const scrollRef = useRef<HTMLDivElement | null>(null);
 	const itemsPerPage = 12;
 
-	useEffect(() => {
-		const API =
-			type === "ingredient"
-				? import.meta.env.VITE_API_INGREDIENTS
-				: import.meta.env.VITE_API_RECIPES;
-
-		fetch(API)
-			.then((res) => res.json())
-			.then((data) => {
-				if (type === "ingredient") {
-					setItems(data as Ingredient[]);
-				} else {
-					setItems(data as Recipe[]);
-				}
-			})
-			.catch(() => console.error("❌ Erreur chargement items"));
-	}, [type]);
 	const totalPages = Math.ceil(items.length / itemsPerPage);
 
 	const pages: (Ingredient | Recipe)[][] = [];
@@ -71,7 +53,6 @@ export default function ItemList({ type, onSelect }: ItemListProps) {
 								}
 								onSelect={() => {
 									setSelectedId(item.id);
-									onSelect(item);
 								}}
 							/>
 						))}

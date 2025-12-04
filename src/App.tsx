@@ -1,33 +1,14 @@
-import { useState } from "react";
+import { Outlet } from "react-router-dom";
 import Filters from "./components/Filters";
-import "./reset.css";
-import { Outlet } from "react-router";
-import type { FilterKey, TypeKey } from "./type";
-import "./App.css";
-import { FiltersContext } from "./components/contexts/FiltersContext";
-
 import NavigationBar from "./components/NavigationBar";
+import { FiltersProvider } from "./contexts/FiltersContext";
 
-function App() {
-	const [hearts, setHearts] = useState(0);
-	const [types, setTypes] = useState<Partial<Record<TypeKey, boolean>>>({});
-	const [filters, setFilters] = useState<Partial<Record<FilterKey, boolean>>>(
-		{},
-	);
-
+export default function App() {
 	return (
-		<FiltersContext.Provider
-			value={{ hearts, filters, types, setHearts, setFilters, setTypes }}
-		>
-			<Filters
-				HeartsChange={setHearts}
-				EffectsChange={setFilters}
-				TypesChange={setTypes}
-			/>
+		<FiltersProvider>
+			<Filters />
 			<Outlet />
 			<NavigationBar />
-		</FiltersContext.Provider>
+		</FiltersProvider>
 	);
 }
-
-export default App;

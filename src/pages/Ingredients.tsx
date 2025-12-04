@@ -1,19 +1,11 @@
 import { useEffect, useState } from "react";
-import DetailIngredient from "../components/DetailIngredient";
 import ItemList from "../components/items/ItemList";
 import { INGREDIENTS_API } from "../constants";
-import { useInventory } from "../contexts/InventoryContext";
-import { useFilters } from "../components/contexts/FiltersContext";
+import { useFilters } from "../contexts/FiltersContext";
 import type { Ingredient } from "../type";
-import { effectMap, typeMap } from "../type";
 
 export default function Ingredients() {
 	const [ingredients, setIngredients] = useState<Ingredient[]>([]);
-	const [selectedIngredient, setSelectedIngredient] =
-		useState<Ingredient | null>(null);
-	const { addIngredient } = useInventory();
-
-	const { hearts, filters, types } = useFilters();
 
 	useEffect(() => {
 		fetch(INGREDIENTS_API)
@@ -22,48 +14,9 @@ export default function Ingredients() {
 			.catch(() => console.error("Erreur lors du chargement"));
 	}, []);
 
-	const filteredIngredients = ingredients.filter((ingredient) => {
-		if (hearts > 0 && ingredient.hearts < hearts) return false;
+	const { filters } = useFilters();
 
-		const activeTypes = Object.keys(types).filter(
-			(key) => types[key as keyof typeof types],
-		);
-		if (
-			activeTypes.length > 0 &&
-			!activeTypes.some((key) =>
-				typeMap[key as keyof typeof typeMap].some(
-					(val) =>
-						val.toLowerCase().trim() ===
-						ingredient.category.toLowerCase().trim(),
-				),
-			)
-		) {
-			return false;
-		}
+	// Parcourir les filters pour filtrer les ingrédients
 
-		const activeFilters = Object.keys(filters).filter(
-			(key) => filters[key as keyof typeof filters],
-		);
-		if (
-			activeFilters.length > 0 &&
-			!activeFilters.some((key) =>
-				effectMap[key as keyof typeof effectMap].some(
-					(val) =>
-						val.toLowerCase().trim() === ingredient.effect.toLowerCase().trim(),
-				),
-			)
-		) {
-			return false;
-		}
-
-		return true;
-	});
-
-	return filteredIngredients.length > 0 ? (
-		<ItemList items={filteredIngredients} type="ingredient" />
-	) : (
-		<p>Aucun ingrédient trouvé.</p>
-	);
+	return <ItemList items={ingredients} type="ingredient" />;
 }
-
-export default Ingredients;

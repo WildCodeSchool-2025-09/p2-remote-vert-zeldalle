@@ -1,109 +1,36 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./Filter.css";
-import { useNavigate } from "react-router-dom";
-import type {
-	FilterKey,
-	Ingredient,
-	Recipe,
-	Suggestion,
-	TypeKey,
-} from "../type";
+import { useFilters } from "../contexts/FiltersContext";
 
-// ---------------------------------------- Filters -------------------------------------
-
-type FiltersProps = {
-	HeartsChange?: (value: number) => void;
-	EffectsChange?: (filters: Record<FilterKey, boolean>) => void;
-	TypesChange?: (types: Record<TypeKey, boolean>) => void;
-};
-
-function Filters({ HeartsChange, EffectsChange, TypesChange }: FiltersProps) {
-	const [ingredients, setIngredients] = useState<Ingredient[]>([]);
-	const [recettes, setRecettes] = useState<Recipe[]>([]);
-	const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
-
-	// Charger les données depuis tes API
-	useEffect(() => {
-		fetch(import.meta.env.VITE_API_INGREDIENTS)
-			.then((res) => res.json())
-			.then((data) => setIngredients(data));
-
-		fetch(import.meta.env.VITE_API_RECIPES)
-			.then((res) => res.json())
-			.then((data) => setRecettes(data));
-	}, []);
-
-	// Fonction de recherche/autocomplétion
-	const handleSearch = (query: string) => {
-		const q = query.toLowerCase();
-
-		if (!q) {
-			setSuggestions([]);
-			return;
-		}
-
-		const foundIngredients: Suggestion[] = ingredients
-			.filter((i) => i.name.toLowerCase().startsWith(q))
-			.map((i) => ({ name: i.name, kind: "ingredient" }));
-
-		const foundRecettes: Suggestion[] = recettes
-			.filter((r) => r.name.toLowerCase().startsWith(q))
-			.map((r) => ({ name: r.name, kind: "recette" }));
-
-		setSuggestions([...foundIngredients, ...foundRecettes]);
-	};
+function Filters() {
 	return (
 		<div className="filter-bar">
-			<Heart HeartsChange={HeartsChange} />
-			<Effects EffectsChange={EffectsChange} />
-			<Type TypesChange={TypesChange} />
-			<SearchBar onSearch={handleSearch} suggestions={suggestions} />
+			<Hearts />
+			<Effects />
+			<Categories />
+			<Name />
 		</div>
 	);
 }
 
-export default Filters;
+function Hearts() {
+	const { updateFilters } = useFilters();
 
-// ---------------------------------------- Hearts -------------------------------------
+	const [hearts, setHearts] = useState<number>(0);
 
-type HeartProps = {
-	max?: number;
-	HeartsChange?: (value: number) => void;
-};
+	const updateHearts = (value: number) => {
+		updateFilters({
+			hearts: value ? Number(value) : 0,
+		});
 
-export function Heart({ max = 10, HeartsChange }: HeartProps) {
-	const [Hearts, setHearts] = useState<number>(0);
-
-	const handleClick = (index: number, fraction: number) => {
-		const value = index + fraction;
 		setHearts(value);
-		HeartsChange?.(value);
-	};
-
-	const handleIncrement = () => {
-		if (Hearts < max) {
-			const newValue = Hearts + 0.25;
-			setHearts(newValue);
-			HeartsChange?.(newValue);
-		}
-	};
-
-	const handleDecrement = () => {
-		if (Hearts > 0) {
-			const newValue = Hearts - 0.25;
-			setHearts(newValue);
-			HeartsChange?.(newValue);
-		}
 	};
 
 	const getHeartLevel = (i: number): JSX.Element => {
-		const diff = Hearts - i;
-
+		const diff = hearts - i;
 		if (diff >= 1) return <img src="/images/hearts/Fullheart.png" alt="full" />;
 		if (diff >= 0.75)
-			return (
-				<img src="/images/hearts/Threequarterheart.png" alt="three-quarters" />
-			);
+			return <img src="/images/hearts/Threequarterheart.png" alt="3/4" />;
 		if (diff >= 0.5)
 			return <img src="/images/hearts/Halfheart.png" alt="half" />;
 		if (diff >= 0.25)
@@ -111,38 +38,48 @@ export function Heart({ max = 10, HeartsChange }: HeartProps) {
 		return <img src="/images/hearts/Emptyheart.png" alt="empty" />;
 	};
 
-	const fractions: number[] = [0.25, 0.5, 0.75, 1];
-	const hearts = Array.from({ length: max }, (_, i) => ({ id: `heart-${i}` }));
+	const fractions = [0.25, 0.5, 0.75, 1];
+	const heartsArray = Array.from({ length: 10 }, (_, i) => i);
 
 	return (
 		<div className="heart-section">
 			<div className="heart-controls">
-				<button type="button" onClick={handleDecrement}>
+				<button
+					type="button"
+					onClick={() => {
+						return hearts > 0 && updateHearts(hearts - 0.25);
+					}}
+				>
 					-
 				</button>
-				<button type="button" onClick={handleIncrement}>
+				<button
+					type="button"
+					onClick={() => {
+						return hearts < 10 && updateHearts(hearts + 0.25);
+					}}
+				>
 					+
 				</button>
 			</div>
 
 			<div className="heart-bar">
-				{hearts.map((heart, index) => (
-					<div key={heart.id} className="heart-slot">
+				{heartsArray.map((i) => (
+					<div key={i} className="heart-slot">
 						{fractions.map((fraction) => (
 							<div
-								key={`${heart.id}-fraction-${fraction}`}
+								key={`${i}-${fraction}`}
 								role="button"
 								tabIndex={0}
 								className={`heart-click-zone zone-${fraction * 100}`}
-								onClick={() => handleClick(index, fraction)}
+								onClick={() => updateHearts(i + fraction)}
 								onKeyDown={(e) => {
 									if (e.key === "Enter" || e.key === " ") {
-										handleClick(index, fraction);
+										updateHearts(i + fraction);
 									}
 								}}
 							/>
 						))}
-						{getHeartLevel(index)}
+						{getHeartLevel(i)}
 					</div>
 				))}
 			</div>
@@ -152,71 +89,76 @@ export function Heart({ max = 10, HeartsChange }: HeartProps) {
 
 // ---------------------------------------- Effects -------------------------------------
 
-type EffectProps = {
-	EffectsChange?: (filters: Record<FilterKey, boolean>) => void;
-};
+export function Effects() {
+	const { updateFilters } = useFilters();
+	const [effects, setEffects] = useState<string[]>([]);
 
-export function Effects({ EffectsChange }: EffectProps) {
-	const [effectState, setEffectsState] = useState<Record<FilterKey, boolean>>({
-		cold: false,
-		stamina: false,
-		heat: false,
-		mighty: false,
-		sneaky: false,
-		climbing: false,
-	});
+	function toggleEffect(effect: string) {
+		setEffects((prev) => {
+			const exists = prev.includes(effect);
 
-	const toggleFilter = (key: FilterKey) => {
-		setEffectsState((prev) => {
-			const updated = { ...prev, [key]: !prev[key] };
-			EffectsChange?.(updated);
-			return updated;
+			if (exists) {
+				return prev.filter((e) => e !== effect);
+			}
+
+			return [...prev, effect];
 		});
-	};
+
+		updateFilters({
+			effects: effects,
+		});
+	}
 
 	return (
 		<div className="effect-bar">
 			<button
 				type="button"
-				onClick={() => toggleFilter("cold")}
-				className={effectState.cold ? "active" : ""}
+				onClick={() => toggleEffect("Résistance au froid")}
+				className={effects.includes("Résistance au froid") ? "active" : ""}
 			>
-				<img src="/images/effects/Cold resist.png" alt="Cold Resist" />
+				<img src="/images/effects/Cold resist.png" alt="Froid" />
 			</button>
+
 			<button
 				type="button"
-				onClick={() => toggleFilter("stamina")}
-				className={effectState.stamina ? "active" : ""}
+				onClick={() => toggleEffect("Augmente l'endurance")}
+				className={effects.includes("Augmente l'endurance") ? "active" : ""}
 			>
-				<img src="/images/effects/Stamina.png" alt="Stamina Buff" />
+				<img src="/images/effects/Stamina.png" alt="Endurance" />
 			</button>
+
 			<button
 				type="button"
-				onClick={() => toggleFilter("heat")}
-				className={effectState.heat ? "active" : ""}
+				onClick={() => toggleEffect("Résistance à la chaleur")}
+				className={effects.includes("Résistance à la chaleur") ? "active" : ""}
 			>
-				<img src="/images/effects/Heat resist.png" alt="Heat Resist" />
+				<img src="/images/effects/Heat resist.png" alt="Chaleur" />
 			</button>
+
 			<button
 				type="button"
-				onClick={() => toggleFilter("mighty")}
-				className={effectState.mighty ? "active" : ""}
+				onClick={() => toggleEffect("Augmente l'attaque")}
+				className={effects.includes("Augmente l'attaque") ? "active" : ""}
 			>
-				<img src="/public/images/effects/mighty.png" alt="Mighty Buff" />
+				<img src="/images/effects/mighty.png" alt="Force" />
 			</button>
+
 			<button
 				type="button"
-				onClick={() => toggleFilter("sneaky")}
-				className={effectState.sneaky ? "active" : ""}
+				onClick={() => toggleEffect("Augmente la furtivité")}
+				className={effects.includes("Augmente la furtivité") ? "active" : ""}
 			>
-				<img src="/public/images/effects/sneaky.png" alt="Sneaky Buff" />
+				<img src="/images/effects/sneaky.png" alt="Discretion" />
 			</button>
+
 			<button
 				type="button"
-				onClick={() => toggleFilter("climbing")}
-				className={effectState.climbing ? "active" : ""}
+				onClick={() => toggleEffect("Augmente la vitesse d'escalade")}
+				className={
+					effects.includes("Augmente la vitesse d'escalade") ? "active" : ""
+				}
 			>
-				<img src="/images/effects/Climbing.png" alt="Climbing Buff" />
+				<img src="/images/effects/Climbing.png" alt="Escalade" />
 			</button>
 		</div>
 	);
@@ -224,71 +166,74 @@ export function Effects({ EffectsChange }: EffectProps) {
 
 // ---------------------------------------- Types -------------------------------------
 
-type TypeProps = {
-	TypesChange?: (types: Record<TypeKey, boolean>) => void;
-};
+function Categories() {
+	const { updateFilters } = useFilters();
+	const [categories, setCategories] = useState<string[]>([]);
 
-export function Type({ TypesChange }: TypeProps) {
-	const [typeState, setFilters] = useState<Record<TypeKey, boolean>>({
-		meats: false,
-		fruitsvegetables: false,
-		minerals: false,
-		insects: false,
-		fishs: false,
-		monsters: false,
-	});
+	function toggleCategory(category: string) {
+		setCategories((prev) => {
+			const exists = prev.includes(category);
 
-	const toggleFilter = (key: TypeKey) => {
-		setFilters((prev) => {
-			const updated = { ...prev, [key]: !prev[key] };
-			TypesChange?.(updated);
-			return updated;
+			if (exists) {
+				return prev.filter((e) => e !== category);
+			}
+
+			return [...prev, category];
 		});
-	};
+
+		updateFilters({
+			categories: categories,
+		});
+	}
 
 	return (
 		<div className="type-bar">
 			<button
 				type="button"
-				onClick={() => toggleFilter("meats")}
-				className={typeState.meats ? "active" : ""}
+				onClick={() => toggleCategory("Viande")}
+				className={categories.includes("Viande") ? "active" : ""}
 			>
-				<img src="/images/type/meats.png" alt="Type meats" />
+				<img src="/images/type/meats.png" alt="Viandes" />
 			</button>
+
 			<button
 				type="button"
-				onClick={() => toggleFilter("fruitsvegetables")}
-				className={typeState.fruitsvegetables ? "active" : ""}
+				onClick={() => toggleCategory("Fruits/Légumes")}
+				className={categories.includes("Fruits/Légumes") ? "active" : ""}
 			>
-				<img src="/images/type/fruits.vegetables.png" alt="Type fruits/vege" />
+				<img src="/images/type/fruits.vegetables.png" alt="Fruits/légumes" />
 			</button>
+
 			<button
 				type="button"
-				onClick={() => toggleFilter("minerals")}
-				className={typeState.minerals ? "active" : ""}
+				onClick={() => toggleCategory("Minéraux")}
+				className={categories.includes("Minéraux") ? "active" : ""}
 			>
-				<img src="/images/type/minerals.png" alt="Type minerals" />
+				<img src="/images/type/minerals.png" alt="Mineraux" />
 			</button>
+
 			<button
 				type="button"
-				onClick={() => toggleFilter("insects")}
-				className={typeState.insects ? "active" : ""}
+				onClick={() => toggleCategory("Insectes")}
+				className={categories.includes("Insectes") ? "active" : ""}
 			>
-				<img src="/images/type/insects.png" alt="Type insects" />
+				<img src="/images/type/insects.png" alt="Insects" />
 			</button>
+
 			<button
 				type="button"
-				onClick={() => toggleFilter("fishs")}
-				className={typeState.fishs ? "active" : ""}
+				onClick={() => toggleCategory("Poissons")}
+				className={categories.includes("Poissons") ? "active" : ""}
 			>
-				<img src="/images/type/fishs.png" alt="Type fishs" />
+				<img src="/images/type/fishs.png" alt="Poissons" />
 			</button>
+
 			<button
 				type="button"
-				onClick={() => toggleFilter("monsters")}
-				className={typeState.monsters ? "active" : ""}
+				onClick={() => toggleCategory("Monstres")}
+				className={categories.includes("Monstres") ? "active" : ""}
 			>
-				<img src="/images/type/monsters.png" alt="Type monsters" />
+				<img src="/images/type/monsters.png" alt="Monstres" />
 			</button>
 		</div>
 	);
@@ -296,30 +241,16 @@ export function Type({ TypesChange }: TypeProps) {
 
 // ---------------------------------------- Searchbar -------------------------------------
 
-type SearchProps = {
-	onSearch?: (query: string) => void;
-	suggestions?: Suggestion[];
-};
+function Name() {
+	const { updateFilters } = useFilters();
+	const [name, setName] = useState<string>("");
 
-export function SearchBar({ onSearch, suggestions = [] }: SearchProps) {
-	const [query, setQuery] = useState("");
-	const navigate = useNavigate();
+	const updateName = (value: string) => {
+		updateFilters({
+			name: value,
+		});
 
-	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const value = e.target.value;
-		setQuery(value);
-		onSearch?.(value);
-	};
-
-	const handleSelect = (s: Suggestion) => {
-		setQuery(s.name);
-		onSearch?.(s.name);
-
-		if (s.kind === "recette") {
-			navigate(`/recette/${s.name}`);
-		} else {
-			navigate(`/ingredient/${s.name}`);
-		}
+		setName(value);
 	};
 
 	return (
@@ -327,21 +258,13 @@ export function SearchBar({ onSearch, suggestions = [] }: SearchProps) {
 			<input
 				type="text"
 				placeholder="Recherche"
-				value={query}
-				onChange={handleChange}
+				value={name}
+				onChange={(e) => {
+					updateName(e.target.value);
+				}}
 			/>
-
-			{suggestions.length > 0 && (
-				<ul className="suggestions">
-					{suggestions.map((s) => (
-						<li key={s.name}>
-							<button type="button" onClick={() => handleSelect(s)}>
-								{s.name} <span className="kind">({s.kind})</span>
-							</button>
-						</li>
-					))}
-				</ul>
-			)}
 		</div>
 	);
 }
+
+export default Filters;

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import DetailIngredient from "../components/DetailIngredient";
 import RecipeDetail from "../components/RecipeDetail";
 import { useFilters } from "../components/contexts/FiltersContext";
+import ItemList from "../components/items/ItemList";
 import { INGREDIENTS_API, RECIPES_API } from "../constants";
 import type {
 	FilterKey,
