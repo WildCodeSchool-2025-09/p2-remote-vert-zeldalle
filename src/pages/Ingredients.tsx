@@ -16,7 +16,5 @@ export default function Ingredients() {
 
 	const { filters } = useFilters();
 
-	// Parcourir les filters pour filtrer les ingrédients
-
 	return <ItemList items={ingredients} type="ingredient" />;
 }
