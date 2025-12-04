@@ -7,7 +7,8 @@ export default function ItemCard({
 	onSelect,
 	quantity,
 	isSelected,
-}: ItemCardProps & { quantity?: number }) {
+	craftable,
+}: ItemCardProps & { quantity?: number; craftable?: boolean }) {
 	const imagePath =
 		type === "ingredient"
 			? `/images/ingredients/${(item as Ingredient).image}`
@@ -24,7 +25,7 @@ export default function ItemCard({
 	return (
 		<button
 			type="button"
-			className={`item-card ${isSelected ? "selected" : ""}`}
+			className={`item-card ${isSelected ? "selected" : ""} ${craftable === false ? "incomplete" : ""}`}
 			onClick={handleClick}
 		>
 			<img

@@ -35,3 +35,8 @@
 	font-size: 0.8rem;
 	font-weight: bold;
 }
+
+.item-card.incomplete {
+	opacity: 60%;
+	filter: grayscale(1);
+}

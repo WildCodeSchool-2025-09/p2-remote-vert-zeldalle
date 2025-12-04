@@ -24,12 +24,11 @@ function Recipes() {
 				items={recipes}
 				type="recipe"
 				onSelect={(recipe) => {
-					setSelectedIngredient(null); // Reset ingredient view
+					setSelectedIngredient(null);
 					setSelectedRecipe(recipe);
 				}}
 			/>
 
-			{/* → empêche 100% des crashes */}
 			{selectedRecipe && (
 				<RecipeDetail
 					recipe={selectedRecipe}

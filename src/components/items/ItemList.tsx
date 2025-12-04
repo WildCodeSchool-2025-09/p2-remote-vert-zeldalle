@@ -7,9 +7,14 @@ import ItemCard from "./ItemCard";
 interface ItemListProps {
 	type: "ingredient" | "recipe";
 	onSelect: (item: Ingredient | Recipe) => void;
+	grayscaleUncraftable?: boolean;
 }
 
-export default function ItemList({ type, onSelect }: ItemListProps) {
+export default function ItemList({
+	type,
+	onSelect,
+	grayscaleUncraftable,
+}: ItemListProps) {
 	const [items, setItems] = useState<Ingredient[] | Recipe[]>([]);
 	const [page, setPage] = useState(0);
 	const [selectedId, setSelectedId] = useState<number | null>(null);
@@ -17,6 +22,12 @@ export default function ItemList({ type, onSelect }: ItemListProps) {
 
 	const scrollRef = useRef<HTMLDivElement | null>(null);
 	const itemsPerPage = 12;
+
+	const inventoryIds = inventory.map((i) => i.id);
+
+	function isCraftable(recipe: Recipe) {
+		return recipe.ingredient_ids.every((id) => inventoryIds.includes(id));
+	}
 
 	useEffect(() => {
 		const API =
@@ -67,6 +78,11 @@ export default function ItemList({ type, onSelect }: ItemListProps) {
 								quantity={
 									type === "ingredient"
 										? inventory.filter((i) => i.id === item.id).length
+										: undefined
+								}
+								craftable={
+									type === "recipe" && grayscaleUncraftable
+										? isCraftable(item as Recipe)
 										: undefined
 								}
 								onSelect={() => {

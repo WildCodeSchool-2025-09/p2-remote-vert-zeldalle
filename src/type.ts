@@ -23,6 +23,7 @@ export interface Ingredient {
 	image: string;
 	effect_image: string;
 	hearts_image: string;
+	count: number;
 }
 
 export interface ItemCardProps {
