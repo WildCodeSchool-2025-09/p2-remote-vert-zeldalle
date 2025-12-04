@@ -2,17 +2,18 @@
 	position: relative;
 	display: flex;
 	justify-content: flex-start;
+	justify-content: flex-start;
 	align-items: center;
-	width: 88%;
-	margin: 1em auto 0;
+	margin: 0.3em 1.4em;
 	background-color: #fff;
 	border-radius: 10px;
 	box-shadow: inset 0px 0px 5px 2px rgba(0, 0, 0, 0.5);
 	font-size: 14px;
+	font-size: 14px;
 	gap: 10px;
 	flex-wrap: nowrap;
-	gap: 6px;
-	padding: 2%;
+	margin-bottom: 0;
+	padding-bottom: 0;
 }
 
 .ImageIngredient {
@@ -26,9 +27,17 @@
 	height: 70px;
 	margin-left: 5px;
 	margin-top: 5px;
+	width: 70px;
+	height: 70px;
+	margin-left: 5px;
+	margin-top: 5px;
 }
 
 .ImageIngredientsetting {
+	width: 70px;
+	height: 70px;
+	object-fit: cover;
+	border-radius: 8px;
 	width: 70px;
 	height: 70px;
 	object-fit: cover;
@@ -42,6 +51,7 @@
 	inset: 0;
 	border-radius: 10px;
 	z-index: 1;
+	background-color: rgba(36, 35, 35, 0.5);
 	background-color: rgba(36, 35, 35, 0.5);
 }
 
@@ -68,6 +78,7 @@
 	gap: 10px;
 	justify-content: space-between;
 	flex: 1;
+	flex: 1;
 }
 
 .MapButton {
@@ -80,12 +91,13 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	margin-right: 35px;
 }
 
 .CounterButtons {
 	display: flex;
 	align-items: center;
-	gap: 5px;
+	gap: 10px;
 }
 
 .BtnMinus,
@@ -138,13 +150,13 @@
 	justify-content: center;
 	align-items: center;
 	z-index: 10000;
+	z-index: 10000;
 }
 .Mapcard {
 	align-items: center;
 	border-radius: 18px;
 	max-width: 88vw;
-	max-height: 70vh;
-	margin-top: 70px;
+	max-height: 65vh;
 }
 .Mapcard-container {
 	display: flex;
@@ -155,17 +167,20 @@
 .RightDetails {
 	display: flex;
 	flex-direction: column;
-	align-items: center;
+	align-items: flex-end;
 	flex: 1;
 	margin-top: 5px;
-	margin-right: 5px;
 }
 h3 {
 	margin-top: 5px;
 	margin-bottom: 5px;
-	text-align: center;
 }
 
+.ingredient-detail {
+	gap: 6px;
+	padding: 3%;
+	padding-bottom: 0;
+}
 @media (max-width: 900px) {
 	.MapButton {
 		height: 65px;

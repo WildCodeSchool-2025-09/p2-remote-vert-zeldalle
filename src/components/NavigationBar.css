@@ -4,36 +4,27 @@
 	left: 0;
 	width: 100vw;
 	transform: none;
-
 	display: flex;
 	justify-content: center;
 	align-items: flex-end;
-
 	gap: 0;
-
 	z-index: 2000;
 	pointer-events: none;
 }
 
 .nav-card {
 	pointer-events: all;
-
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 	justify-content: center;
-
 	gap: 4px;
-
 	flex: 1;
 	width: auto;
 	max-width: none;
-
 	min-width: 70px;
 	height: 42px;
-
 	padding: 6px 10px 0 10px;
-
 	background: rgba(0, 0, 0, 0.6);
 	background-image: linear-gradient(
 		to top,
@@ -44,7 +35,6 @@
 	border: 2px solid rgba(180, 180, 180, 0.35);
 	border-bottom: none;
 	border-radius: 15px 15px 0 0;
-
 	color: white;
 	font-family: var(--font-family-title);
 	text-decoration: none;
@@ -58,8 +48,10 @@
 }
 
 .nav-card span {
-	font-size: 0.8rem;
+	font-size: 0.9rem;
 	white-space: nowrap;
+	font-family: var(--font-family-title);
+	letter-spacing: 0.07em;
 }
 
 .nav-card.active {

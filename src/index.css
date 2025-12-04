@@ -1,12 +1,16 @@
 html,
 body {
 	width: 100%;
-	min-height: 100vh;
+	height: 96%;
 	overflow-x: hidden;
-	overflow-y: hidden;
 	background-image: url("./components/assets/homeBackground.png");
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
 	background-attachment: fixed;
+}
+
+@font-face {
+	font-family: "HyliaSerifBeta";
+	src: url("/fonts/HyliaSerifBeta-Regular.otf") format("truetype");
 }

@@ -3,13 +3,11 @@ import DetailIngredient from "../components/DetailIngredient";
 import ItemList from "../components/items/ItemList";
 import { INGREDIENTS_API } from "../constants";
 import type { Ingredient } from "../type";
-import { useInventory } from "../contexts/InventoryContext";
 
 export default function Ingredients() {
 	const [ingredients, setIngredients] = useState<Ingredient[]>([]);
 	const [selectedIngredient, setSelectedIngredient] =
 		useState<Ingredient | null>(null);
-	const { addIngredient } = useInventory();
 
 	useEffect(() => {
 		fetch(INGREDIENTS_API)

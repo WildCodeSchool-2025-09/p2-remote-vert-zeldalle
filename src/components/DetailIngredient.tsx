@@ -20,17 +20,17 @@ export default function DetailIngredient({
 	).length;
 	const [count, setCount] = useState(initialQuantity);
 
-	const handleAddToInventory = () => {
-		addIngredient(ingredient);
-		setCount((prev) => prev + 1);
-	};
-
 	useEffect(() => {
 		const newQuantity = inventory.filter(
 			(item) => item.id === ingredient.id,
 		).length;
 		setCount(newQuantity);
 	}, [ingredient, inventory]);
+
+	const handleAddToInventory = () => {
+		addIngredient(ingredient);
+		setCount((prev) => prev + 1);
+	};
 
 	const handleLessFromInventory = () => {
 		if (count > 0) {
@@ -68,10 +68,11 @@ export default function DetailIngredient({
 					)}
 				</div>
 			</div>
+
 			<div className="InfoIngredient">
 				<div className="NomIngredient">
 					<h3>{ingredient.name}</h3>
-					{ingredient.description}
+					<p>{ingredient.description}</p>
 				</div>
 
 				<div className="RightDetails">
@@ -106,6 +107,7 @@ export default function DetailIngredient({
 							</div>
 						</div>
 					)}
+
 					<div className="CounterButtons">
 						<button
 							type="button"

@@ -1,38 +1,41 @@
 import type { Ingredient, ItemCardProps, Recipe } from "../../type";
 import "./ItemCard.css";
 
-function ItemCard({ item, type, onSelect }: ItemCardProps) {
-	if (type === "ingredient") {
-		const ingredient = item as Ingredient;
+export default function ItemCard({
+	item,
+	type,
+	onSelect,
+	quantity,
+	isSelected,
+	craftable,
+}: ItemCardProps & { quantity?: number; craftable?: boolean }) {
+	const imagePath =
+		type === "ingredient"
+			? `/images/ingredients/${(item as Ingredient).image}`
+			: `/images/recipes/${(item as Recipe).image}`;
 
-		return (
-			<button
-				type="button"
-				className="item-card"
-				onClick={() => onSelect({ item: ingredient, type: "ingredient" })}
-			>
-				<img
-					src={`/images/ingredients/${ingredient.image}`}
-					alt={ingredient.name}
-				/>
-			</button>
-		);
-	}
+	const handleClick = () => {
+		if (type === "ingredient") {
+			onSelect(item as Ingredient);
+		} else {
+			onSelect({ item, type });
+		}
+	};
 
-	if (type === "recipe") {
-		const recipe = item as Recipe;
-
-		return (
-			<button
-				type="button"
-				className="item-card"
-				onClick={() => onSelect({ item: recipe, type: "recipe" })}
-			>
-				<img src={`/images/recipes/${recipe.image}`} alt={recipe.name} />
-			</button>
-		);
-	}
-	return null;
+	return (
+		<button
+			type="button"
+			className={`item-card ${isSelected ? "selected" : ""} ${craftable === false ? "incomplete" : ""}`}
+			onClick={handleClick}
+		>
+			<img
+				src={imagePath}
+				alt={item.name}
+				onError={() => console.warn("Image introuvable :", imagePath)}
+			/>
+			{quantity !== undefined && quantity > 0 && (
+				<p className="quantity">{quantity} </p>
+			)}
+		</button>
+	);
 }
-
-export default ItemCard;

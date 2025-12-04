@@ -27,14 +27,13 @@ export interface Ingredient {
 }
 
 export interface ItemCardProps {
-		item: Ingredient | Recipe;
-		type: "ingredient" | "recipe";
-		count?: number;
-		quantity: number;
-		onIncrement?: () => void;
-		onSelect?: (item: Ingredient | Recipe) => void;
-		isSelected?: boolean;
-	}
+	item: Ingredient | Recipe;
+	type: "ingredient" | "recipe";
+	count?: number;
+	onIncrement?: () => void;
+	onSelect?: (item: Ingredient | Recipe) => void;
+	isSelected?: boolean;
+}
 
 export interface ItemListProps {
 	items: (Ingredient | Recipe)[];
